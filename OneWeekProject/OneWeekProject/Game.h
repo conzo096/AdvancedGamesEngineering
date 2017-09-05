@@ -1,6 +1,6 @@
 #pragma once
-#include "SFML/Window.hpp"
-#include "SFML/Graphics.hpp"
+#include "stdafx.h"
+
 class Game
 {
 public:
@@ -46,7 +46,14 @@ public:
 	{
 		return instance->mainWindow;
 	}
-
+	static sf::Clock GetClock()
+	{
+		return instance->clock;
+	}
+	static void SetClock(sf::Clock cl)
+	{
+		instance->clock = cl;
+	}
 	// Start the game engine.
 	void Start();
 
@@ -66,7 +73,8 @@ private:
 	int screenHeight;
 	// The window everything is rendered too.
 	sf::RenderWindow mainWindow;
-
+	// Clock to keep track of timings.
+	sf::Clock clock;
 
 	// Loops, checking what game state it is in and acts
 	// accordingly.

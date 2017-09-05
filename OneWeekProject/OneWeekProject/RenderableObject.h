@@ -13,8 +13,11 @@ public:
 	void Draw(sf::RenderWindow& renderWindow);
 
 private:
-	// Visual image of the game object.
+	// Texture of the sprite.
+	sf::Texture texture;
+	// Physical object.
 	sf::Sprite sprite;
+	// 
 	// Bounding box around the 2D object.
 	sf::Rect<int> boundingBox;
 	// Direction and speed of the object.

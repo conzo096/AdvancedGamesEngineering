@@ -120,6 +120,7 @@
     <ClInclude Include="PlayerShip.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="RenderableObject.h" />
+    <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +130,7 @@
     <ClCompile Include="PlayerShip.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
+    <ClCompile Include="SplashScreen.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

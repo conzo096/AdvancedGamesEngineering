@@ -1,10 +1,11 @@
 #include "Game.h"
 #include "stdafx.h"
-
+#include "SplashScreen.h"
+#include "MainMenu.h"
 Game *Game::instance = 0;
 
 
-Game::Game() : screenWidth(1024), screenHeight(768), gameState(uninitialized)
+Game::Game() : screenWidth(1024), screenHeight(768), gameState(uninitialized), clock(sf::Clock())
 {
 }
 Game::~Game()
@@ -70,52 +71,29 @@ void Game::GameLoop()
 // Displays the splash screen state.
 void Game::ShowSplashScreen()
 {
-	GetRenderWindow().clear(sf::Color(0, 0, 255));
-	
-	sf::Texture texture;
-
-	if(!texture.loadFromFile("Images/SplashScreen"))
-		assert(texture.loadFromFile("Images/SplashScreen.png"));
-	sf::Sprite splashLogo(texture);
-	GetRenderWindow().draw(splashLogo);
-
-	GetRenderWindow().display();
-	sf::Event currentEvent;
-	
-	// Move to main menu now.
-	while (GetRenderWindow().pollEvent(currentEvent))
-	{
-		if (currentEvent.type == sf::Event::EventType::KeyPressed
-			|| currentEvent.type == sf::Event::EventType::MouseButtonPressed
-			|| currentEvent.type == sf::Event::EventType::Closed)
-		{
-			SetGameState(showingMainMenu);
-		}
-	}
+	SplashScreen splashScreen;
+	splashScreen.Show(GetRenderWindow());
+	SetGameState(showingMainMenu);
 }
 
 void Game::ShowMainMenu()
 {
 
-	//int result;
-	//switch (result)
-	//{
-	//	case MainMenu::exit:
-	//	{
-	//		gameState = Game::Exiting;
-	//		break;
-	//	}
-	//	case MainMenu::play:
-	//	{
-	//		gameState = Game::Playing;
-	//		break;
-	//	}
-	//	case MainMenu::graphicsMenu:
-	//	{
-	//		ShowGraphicsMenu();
-	//		break;
-	//	}
-	//}
+	MainMenu mainMenu;
+	MainMenu::MenuResult result = mainMenu.Show(mainWindow);
+	switch (result)
+	{
+		case MainMenu::exitApplication:
+		{
+			gameState = Game::exiting;
+			break;
+		}
+		case MainMenu::playGame:
+		{
+			gameState = Game::playing;
+			break;
+		}
+	}
 
 	GetRenderWindow().clear(sf::Color(0, 255, 0));
 	GetRenderWindow().display();

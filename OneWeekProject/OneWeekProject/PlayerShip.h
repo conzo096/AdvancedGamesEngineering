@@ -8,6 +8,7 @@ public:
 	~PlayerShip();
 	void Update(float deltaTime);
 private:
+	// What type of power up does the player has?
 	PowerUp::PowerUpType power; 
 
 };
