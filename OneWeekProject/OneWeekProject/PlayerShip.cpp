@@ -1,9 +1,10 @@
 #include "PlayerShip.h"
+#include "PowerUp.h"
 
 
-
-PlayerShip::PlayerShip()
+PlayerShip::PlayerShip():power(PowerUp::none)
 {
+
 }
 
 

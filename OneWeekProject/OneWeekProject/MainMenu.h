@@ -12,7 +12,8 @@ public:
 	struct MenuItem
 	{
 	public:
-		sf::Rect<int> rect;
+		sf::Texture buttonTexture;
+		sf::Sprite buttonSprite;
 		MenuResult action;
 	};
 

@@ -12,6 +12,21 @@ public:
 	// Draw the game object.
 	void Draw(sf::RenderWindow& renderWindow);
 
+	sf::Sprite& GetSprite()
+	{
+		return sprite;
+	}
+
+	void LoadSprite(std::string fileName)
+	{
+		if (texture.loadFromFile(fileName))
+			sprite = sf::Sprite(texture);
+	}
+	void SetSprite(sf::Sprite spr)
+	{
+		sprite = spr;
+	}
+
 private:
 	// Texture of the sprite.
 	sf::Texture texture;

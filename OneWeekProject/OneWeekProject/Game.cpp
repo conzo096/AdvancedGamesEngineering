@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "SplashScreen.h"
 #include "MainMenu.h"
+#include "PlayerShip.h"
 Game *Game::instance = 0;
 
 
@@ -18,9 +19,12 @@ void Game::Start()
 {
 	if (GetGameState() != uninitialized)
 		return;
-
 	// Create the initial window.
 	GetRenderWindow().create(sf::VideoMode(GetScreenWidth(), GetScreenHeight(), 32), "Week One Project!");
+	//Load in all the characters.
+	PlayerShip player;
+	player.LoadSprite("Images/GameObjects/PlayerShip.png");
+	player.GetSprite().setPosition(5,5);
 	// Change the game state to display the splash logo.
 	SetGameState(showingSplashScreen);
 	GameLoop();
@@ -78,40 +82,28 @@ void Game::ShowSplashScreen()
 
 void Game::ShowMainMenu()
 {
-
 	MainMenu mainMenu;
 	MainMenu::MenuResult result = mainMenu.Show(mainWindow);
 	switch (result)
 	{
-		case MainMenu::exitApplication:
-		{
-			gameState = Game::exiting;
-			break;
-		}
 		case MainMenu::playGame:
 		{
-			gameState = Game::playing;
+			SetGameState(Game::playing);
 			break;
 		}
-	}
-
-	GetRenderWindow().clear(sf::Color(0, 255, 0));
-	GetRenderWindow().display();
-	sf::Event currentEvent;
-	while (GetRenderWindow().pollEvent(currentEvent))
-	{
-		if (currentEvent.type == sf::Event::EventType::KeyPressed
-			|| currentEvent.type == sf::Event::EventType::MouseButtonPressed
-			|| currentEvent.type == sf::Event::EventType::Closed)
+		case MainMenu::exitApplication:
 		{
-			SetGameState(playing);
+			SetGameState(Game::exiting);
+			break;
 		}
 	}
 }
 
 void Game::ShowPauseScreen()
 {
-	GetRenderWindow().clear(sf::Color(0, 255, 255));
+
+	Instance()->ShowMainMenu();
+	/*GetRenderWindow().clear(sf::Color(0, 255, 255));
 	GetRenderWindow().display();
 	sf::Event currentEvent;
 	while (GetRenderWindow().pollEvent(currentEvent))
@@ -122,9 +114,10 @@ void Game::ShowPauseScreen()
 		{
 			SetGameState(playing);
 		}
-	}
+	}*/
 }
 
+//Not yet implemented.
 void Game::ShowGraphicsMenu()
 {
 	GetRenderWindow().clear(sf::Color(255, 255, 0));
