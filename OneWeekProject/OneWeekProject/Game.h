@@ -4,42 +4,83 @@
 class Game
 {
 public:
-	
 	enum GameState
 	{
 		uninitialized, showingSplashScreen,paused,
 		showingMainMenu, playing, exiting, showingGraphicsMenu
 	};
 
-	Game();
 	~Game();
 
+	static Game *Instance()
+	{
+		if (!instance)
+			instance = new Game();
+		return instance;
+	}
+	static GameState GetGameState()
+	{
+		return instance->gameState;
+	}
+	static void SetGameState(GameState state)
+	{
+		instance->gameState = state;
+	}
+	static int GetScreenWidth()
+	{
+		return instance->screenWidth;
+	}
+	static void SetScreenWidth(int width)
+	{
+		instance->screenWidth = width;
+	}
+	static int GetScreenHeight()
+	{
+		return instance->screenHeight;
+	}
+	static void SetScreenHeight(int height)
+	{
+		instance->screenHeight = height;
+	}
+	static sf::RenderWindow& GetRenderWindow()
+	{
+		return instance->mainWindow;
+	}
+
 	// Start the game engine.
-	static void Start();
+	void Start();
 
 private:
+	
+	// Singleton instance of the game engine.
+	static Game *instance;
+
+	Game();
+
+
+
 	// What state the window is currently in.
-	static GameState gameState;
+	GameState gameState;
 	// Width and height of the screen.
-	static int SCREEN_WIDTH;
-	static int SCREEN_HEIGHT;
+	int screenWidth;
+	int screenHeight;
 	// The window everything is rendered too.
-	static sf::RenderWindow mainWindow;
+	sf::RenderWindow mainWindow;
 
 
 	// Loops, checking what game state it is in and acts
 	// accordingly.
-	static void GameLoop(); 
+	void GameLoop(); 
 	// Show the splash screen.
-	static void ShowSplashScreen();
+	void ShowSplashScreen();
 	// Show the main menu of the game.
-	static void ShowMainMenu();
+	void ShowMainMenu();
 	// Display the pause screen.
-	static void ShowPauseScreen();
+	void ShowPauseScreen();
 	// Show the graphics menu.
-	static void ShowGraphicsMenu();
+	void ShowGraphicsMenu();
 	// Update the 'main game'.
-	static void UpdateGame(sf::Event& currentEvent);
+	void UpdateGame(sf::Event& currentEvent);
 
 };
 

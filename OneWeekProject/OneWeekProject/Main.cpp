@@ -2,5 +2,6 @@
 
 int main()
 {
-	Game::Start();
+	// Start the game.
+	Game::Instance()->Start();
 }
