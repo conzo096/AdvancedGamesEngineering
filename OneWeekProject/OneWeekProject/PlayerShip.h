@@ -1,8 +1,8 @@
 #pragma once
-#include "RenderableObject.h"
+#include "Ship.h"
 #include "PowerUp.h"
 #include "Bullet.h"
-class PlayerShip : public RenderableObject
+class PlayerShip : public Ship
 {
 public:
 	PlayerShip();
@@ -14,13 +14,10 @@ public:
 		return health;
 	}
 
-	std::vector<Bullet*> bullets;
+
 private:
 	// What type of power up does the player has?
 	PowerUp::PowerUpType power; 
 	// Health of the player.
-	float health;
-	// Array of bullets the play has shot.
-	
 };
 

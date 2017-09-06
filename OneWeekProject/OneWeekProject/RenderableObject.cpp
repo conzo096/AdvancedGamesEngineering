@@ -2,7 +2,7 @@
 
 
 
-RenderableObject::RenderableObject(): velocity(sf::Vector2f(0,0))
+RenderableObject::RenderableObject(): velocity(sf::Vector2f(0,0)), timeActive(0),isActive(true)
 {
 }
 

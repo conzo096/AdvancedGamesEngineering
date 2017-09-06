@@ -66,7 +66,7 @@ void Game::GameLoop()
 			}
 			case playing:
 			{
-				Instance()->UpdateGame(currentEvent);
+				Instance()->UpdateGame();
 				break;
 			}
 		}
@@ -81,6 +81,8 @@ void Game::ShowSplashScreen()
 	SetGameState(showingMainMenu);
 }
 
+
+// Display the main menu screen.
 void Game::ShowMainMenu()
 {
 	MainMenu mainMenu;
@@ -127,50 +129,64 @@ void Game::ShowGraphicsMenu()
 
 // This handles the actual game logic. What actually happens when the game
 // is running. 
-void Game::UpdateGame(sf::Event& currentEvent)
+void Game::UpdateGame()
 {
-	sf::Font font;
-	font.loadFromFile("Fonts/Cracked Code.ttf");
-	sf::Text myText;
-	// Assign the actual message 
-	PlayerShip* pl = (PlayerShip*) gameManager.Get("Player");
-	if (pl != NULL)
+	sf::Event currentEvent;
+	sf::Clock physicsClock;
+	while (GetGameState() == playing)
 	{
-		myText.setString(std::to_string(pl->GetHealth()));
+		if (gameManager.createNewWave == true)
+		{
+			gameManager.SpawnWave(mainWindow);
+			gameManager.createNewWave = false;
+		}
+		mainWindow.pollEvent(currentEvent);
+		sf::Font font;
+		font.loadFromFile("Fonts/Cracked Code.ttf");
+		sf::Text myText;
+		// Assign the actual message 
+		PlayerShip* pl = (PlayerShip*)gameManager.Get("Player");
+		if (pl != NULL)
+		{
+			myText.setString(std::to_string(pl->GetHealth()));
+		}
+		else
+		{
+			myText.setString("Where did the ship go?");
+		}
+		// assign a size 
+		myText.setCharacterSize(15);
+
+		// Choose a color 
+		myText.setFillColor(sf::Color::White);
+
+		// Set the font to our Text object 
+		myText.setFont(font);
+
+		if (currentEvent.type == sf::Event::Closed)
+			SetGameState(Game::exiting);
+		if (currentEvent.key.code == sf::Keyboard::Escape)
+			SetGameState(Game::paused);
+
+		GetRenderWindow().clear(sf::Color(255, 255, 255));
+
+		GetRenderWindow().draw(myText);
+
+		gameManager.UpdateAll(physicsClock.restart().asSeconds());
+
+
+		// Update ship Draw method to include bullets.
+		std::vector<Bullet*>::const_iterator itr = pl->GetBullets().begin();
+		while (itr != pl->GetBullets().end())
+		{
+			(*itr)->Draw(mainWindow);
+			itr++;
+		}
+		gameManager.DrawAll(GetRenderWindow());
+
+		if (gameManager.enemiesAlive == 0)
+			gameManager.createNewWave = true;
+
+		GetRenderWindow().display();
 	}
-	else
-	{
-		myText.setString("Where did the ship go?");
-	}
-	// assign a size 
-	myText.setCharacterSize(15);
-
-	// Choose a color 
-	myText.setFillColor(sf::Color::White);
-
-	// Set the font to our Text object 
-	myText.setFont(font);
-
-	if (currentEvent.type == sf::Event::Closed)
-		SetGameState(Game::exiting);
-	if (currentEvent.key.code == sf::Keyboard::Escape)
-		SetGameState(Game::paused);
-
-	GetRenderWindow().clear(sf::Color(255, 255, 255));
-
-	GetRenderWindow().draw(myText);
-
-	gameManager.UpdateAll(clock.restart().asSeconds());
-
-
-	std::vector<Bullet*>::const_iterator itr = pl->bullets.begin();
-	while (itr != pl->bullets.end())
-	{
-		(*itr)->Draw(mainWindow);
-		itr++;
-	}
-	gameManager.DrawAll(GetRenderWindow());
-
-	GetRenderWindow().display();
-
 }

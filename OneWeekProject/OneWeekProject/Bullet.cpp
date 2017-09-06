@@ -1,6 +1,6 @@
 #include "Bullet.h"
 #include "Game.h"
-
+#include <iostream>
 
 Bullet::Bullet()
 {
@@ -17,6 +17,14 @@ Bullet::~Bullet()
 void Bullet::Update(float deltaTime)
 {
 	sf::Vector2f pos = GetPosition();
+	timeActive += deltaTime;
+
+	// Remove after a short period of time.
+	if (timeActive > 2.0f)
+	{
+		toBeDeleted = true;
+		return;
+	}
 
 	// Calculate if the move would result in ship being off screen.
 	if (pos.x  < GetSprite().getScale().x
@@ -31,14 +39,20 @@ void Bullet::Update(float deltaTime)
 	}
 
 	//Check if it collides with the any object in game manger.
-	std::map<std::string, RenderableObject*>::const_iterator itr = Game::Instance()->GetGameManager().GetGameObjects().begin();
+	std::map<std::string, RenderableObject*>::iterator itr = Game::Instance()->GetGameManager().GetGameObjects().begin();
 	while (itr != Game::Instance()->GetGameManager().GetGameObjects().end())
 	{
-		if (GetSprite().getGlobalBounds().intersects(itr->second->GetSprite().getGlobalBounds))
+		// Remove elements while iterating
+		if (GetSprite().getGlobalBounds().intersects(itr->second->GetSprite().getGlobalBounds()))
 		{
-
+			if (itr->first != "Player")
+				Game::Instance()->GetGameManager().enemiesAlive--;
+			Game::Instance()->GetGameManager().GetGameObjects().erase(itr->first);
+			break;
 		}
+		itr++;
 	}
+
 
 	GetSprite().move(GetVelocity()*deltaTime);
 }

@@ -2,9 +2,10 @@
 #include "PowerUp.h"
 #include "Game.h"
 
-PlayerShip::PlayerShip():power(PowerUp::none), health(100.0)
+PlayerShip::PlayerShip():power(PowerUp::none)
 {
 	GetMaxVelocity() = sf::Vector2f(10,10);
+	health = 100;
 	isActive = true;
 }
 
@@ -27,7 +28,7 @@ sf::Vector2f RenderableObject::GetPosition() const
 
 void PlayerShip::Update(float deltaTime)
 {
-
+	timeActive += deltaTime;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		GetVelocity().y -= 1.0f;
@@ -59,6 +60,7 @@ void PlayerShip::Update(float deltaTime)
 		GetVelocity().y = -GetVelocity().y; // Bounce by current velocity in opposite direction
 	}
 
+	// Add limit to bullets created.
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		Bullet* bullet = new Bullet();
@@ -72,8 +74,18 @@ void PlayerShip::Update(float deltaTime)
 	GetSprite().move(GetVelocity()*deltaTime);
 
 	// Update all the bullets.
-	for (std::vector<Bullet*>::const_iterator it = bullets.begin(); it != bullets.end(); ++it)
+	std::vector<Bullet*>::iterator itr = GetBullets().begin();
+	while (itr != GetBullets().end())
 	{
-		(*it)->Update(deltaTime);
+		if ((*itr)->toBeDeleted == false)
+			(*itr)->Update(deltaTime);
+		else
+		{
+			GetBullets().erase(itr);
+
+			break;
+		}
+		itr++;
 	}
+
 }

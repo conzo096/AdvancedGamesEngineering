@@ -7,5 +7,6 @@ public:
 	~Bullet();
 
 	void Update(float deltaTime);
+	bool toBeDeleted =false;
 };
 

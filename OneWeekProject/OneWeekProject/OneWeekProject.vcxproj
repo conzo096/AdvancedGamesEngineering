@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C7FB69D-9675-4F63-AAE5-CC15EF993A02}</ProjectGuid>
     <RootNamespace>OneWeekProject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -40,7 +40,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -121,7 +121,9 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="PlayerShip.h" />
     <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="RangedEnemy.h" />
     <ClInclude Include="RenderableObject.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -133,7 +135,9 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="PlayerShip.cpp" />
     <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="RangedEnemy.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
+    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

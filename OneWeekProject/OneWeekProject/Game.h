@@ -95,6 +95,6 @@ private:
 	// Show the graphics menu.
 	void ShowGraphicsMenu();
 	// Update the 'main game'.
-	void UpdateGame(sf::Event& currentEvent);
+	void UpdateGame();
 };
 

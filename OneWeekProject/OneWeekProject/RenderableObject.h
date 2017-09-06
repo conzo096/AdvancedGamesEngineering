@@ -38,13 +38,13 @@ public:
 
 	virtual void SetPosition(float x, float y);
 	virtual sf::Vector2f GetPosition() const;
-
+	// Condition to check status of the game object.
+	bool isActive;
 protected:
 	sf::Vector2f velocity;
 	// Maxiumum velocity.
 	sf::Vector2f maxVelocity;
-	// Condition to check status of the game object.
-	bool isActive;
+
 	// Time the object has been alive.
 	float timeActive;
 

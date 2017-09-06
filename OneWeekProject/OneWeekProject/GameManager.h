@@ -19,12 +19,16 @@ public:
 		return gameObjects;
 	}
 
-private:
+
 	// Wave player is on.
 	int wave;
-	// enemies to spawn.
-	int enemiesToSpawn;
-	// Entity manager.
+	// condition to spawn to new wave.
+	bool createNewWave = true;
+	int enemiesAlive;
+	void SpawnWave(sf::RenderWindow& renderWindow);
+
+private:
+	// Entity manager. - Split this?
 	std::map<std::string, RenderableObject*> gameObjects;
 
 

@@ -1,6 +1,6 @@
 #include "GameManager.h"
-
-
+#include "RangedEnemy.h"
+#include "Game.h"
 
 GameManager::GameManager()
 {
@@ -29,6 +29,25 @@ void GameManager::DeleteObject(std::string name)
 		delete results->second;
 		gameObjects.erase(results);
 	}
+}
+
+
+// Spawn a new wave of enemies.
+void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
+{
+	int enemiesToSpawn = wave*3 +1;
+	enemiesAlive = enemiesToSpawn;
+	for (int i = 0; i < enemiesToSpawn; i++)
+	{
+		RangedEnemy* enemy = new RangedEnemy();
+		enemy->LoadSprite("Images/GameObjects/EnemyShip1.png");
+		enemy->SetHealth(75);
+		// Need to add random feature to this (Spawn just out of view).
+		enemy->SetPosition(50*i, 50);
+		std::string enemyName = "Enemy"+ std::to_string(i);
+		AddObject(enemyName, enemy);
+	}
+	wave++;
 }
 
 
