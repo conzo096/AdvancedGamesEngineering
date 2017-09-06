@@ -3,3 +3,4 @@
 #include "SFML\Window.hpp"
 #include "SFML\Graphics.hpp"
 #include <list>
+#include <map>

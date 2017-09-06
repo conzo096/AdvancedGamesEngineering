@@ -1,5 +1,5 @@
 #include "SplashScreen.h"
-
+#include "Game.h"
 
 SplashScreen::SplashScreen()
 {
@@ -20,7 +20,9 @@ void SplashScreen::Show(sf::RenderWindow & renderWindow)
 	{
 		return;
 	}
+
 	sf::Sprite sprite(image);
+	sprite.setScale(sf::Vector2f(Game::Instance()->GetScreenWidth() / float(image.getSize().x), Game::Instance()->GetScreenHeight() / float(image.getSize().y)));
 	renderWindow.clear();
 	renderWindow.draw(sprite);
 	renderWindow.display();

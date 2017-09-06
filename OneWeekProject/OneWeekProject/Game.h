@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-
+#include "GameManager.h"
 class Game
 {
 public:
@@ -18,42 +18,48 @@ public:
 			instance = new Game();
 		return instance;
 	}
-	static GameState GetGameState()
+	GameState GetGameState()
 	{
 		return instance->gameState;
 	}
-	static void SetGameState(GameState state)
+	void SetGameState(GameState state)
 	{
 		instance->gameState = state;
 	}
-	static int GetScreenWidth()
+	int GetScreenWidth()
 	{
 		return instance->screenWidth;
 	}
-	static void SetScreenWidth(int width)
+	void SetScreenWidth(int width)
 	{
 		instance->screenWidth = width;
 	}
-	static int GetScreenHeight()
+	int GetScreenHeight()
 	{
 		return instance->screenHeight;
 	}
-	static void SetScreenHeight(int height)
+	void SetScreenHeight(int height)
 	{
 		instance->screenHeight = height;
 	}
-	static sf::RenderWindow& GetRenderWindow()
+	sf::RenderWindow& GetRenderWindow()
 	{
 		return instance->mainWindow;
 	}
-	static sf::Clock GetClock()
+	sf::Clock GetClock()
 	{
 		return instance->clock;
 	}
-	static void SetClock(sf::Clock cl)
+	void SetClock(sf::Clock cl)
 	{
 		instance->clock = cl;
 	}
+	GameManager& GetGameManager()
+	{
+		return gameManager;
+	}
+
+
 	// Start the game engine.
 	void Start();
 
@@ -75,7 +81,8 @@ private:
 	sf::RenderWindow mainWindow;
 	// Clock to keep track of timings.
 	sf::Clock clock;
-
+	// Instance of the game manager.
+	GameManager gameManager;
 	// Loops, checking what game state it is in and acts
 	// accordingly.
 	void GameLoop(); 
@@ -89,6 +96,5 @@ private:
 	void ShowGraphicsMenu();
 	// Update the 'main game'.
 	void UpdateGame(sf::Event& currentEvent);
-
 };
 

@@ -25,6 +25,7 @@ MainMenu::MenuResult MainMenu::Show(sf::RenderWindow& renderWindow)
 	playButton.action = playGame;
 	playButton.buttonTexture.loadFromFile("Images/Buttons/MenuStart.png");
 	playButton.buttonSprite = sf::Sprite(playButton.buttonTexture);
+	playButton.buttonSprite.setOrigin(float(playButton.buttonTexture.getSize().x) / 2, float(playButton.buttonTexture.getSize().y) / 2);
 	playButton.buttonSprite.setPosition(float(renderWindow.getSize().x)/2, float(renderWindow.getSize().y) / 3);
 
 	//Exit menu item coordinates
@@ -32,6 +33,7 @@ MainMenu::MenuResult MainMenu::Show(sf::RenderWindow& renderWindow)
 	exitButton.action = exitApplication;
 	exitButton.buttonTexture.loadFromFile("Images/Buttons/MenuExit.png");
 	exitButton.buttonSprite = sf::Sprite(exitButton.buttonTexture);
+	exitButton.buttonSprite.setOrigin(float(exitButton.buttonTexture.getSize().x) / 2, float(exitButton.buttonTexture.getSize().y) / 2);
 	exitButton.buttonSprite.setPosition(float(renderWindow.getSize().x)/2, 2*(float(renderWindow.getSize().y)/3));
 	menuItems.push_back(playButton);
 	menuItems.push_back(exitButton);

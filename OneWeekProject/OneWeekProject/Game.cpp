@@ -6,7 +6,7 @@
 Game *Game::instance = 0;
 
 
-Game::Game() : screenWidth(1024), screenHeight(768), gameState(uninitialized), clock(sf::Clock())
+Game::Game() : screenWidth(1920), screenHeight(1080), gameState(uninitialized), clock(sf::Clock())
 {
 }
 Game::~Game()
@@ -22,9 +22,10 @@ void Game::Start()
 	// Create the initial window.
 	GetRenderWindow().create(sf::VideoMode(GetScreenWidth(), GetScreenHeight(), 32), "Week One Project!");
 	//Load in all the characters.
-	PlayerShip player;
-	player.LoadSprite("Images/GameObjects/PlayerShip.png");
-	player.GetSprite().setPosition(5,5);
+	PlayerShip *player = new PlayerShip();
+	player->LoadSprite("Images/GameObjects/PlayerShip.png");
+	player->GetSprite().setPosition(5,5);
+	GetGameManager().AddObject("Player", player);
 	// Change the game state to display the splash logo.
 	SetGameState(showingSplashScreen);
 	GameLoop();
@@ -128,13 +129,48 @@ void Game::ShowGraphicsMenu()
 // is running. 
 void Game::UpdateGame(sf::Event& currentEvent)
 {
+	sf::Font font;
+	font.loadFromFile("Fonts/Cracked Code.ttf");
+	sf::Text myText;
+	// Assign the actual message 
+	PlayerShip* pl = (PlayerShip*) gameManager.Get("Player");
+	if (pl != NULL)
+	{
+		myText.setString(std::to_string(pl->GetHealth()));
+	}
+	else
+	{
+		myText.setString("Where did the ship go?");
+	}
+	// assign a size 
+	myText.setCharacterSize(15);
+
+	// Choose a color 
+	myText.setFillColor(sf::Color::White);
+
+	// Set the font to our Text object 
+	myText.setFont(font);
 
 	if (currentEvent.type == sf::Event::Closed)
 		SetGameState(Game::exiting);
 	if (currentEvent.key.code == sf::Keyboard::Escape)
 		SetGameState(Game::paused);
 
-	GetRenderWindow().clear(sf::Color(255, 0, 0));
+	GetRenderWindow().clear(sf::Color(255, 255, 255));
+
+	GetRenderWindow().draw(myText);
+
+	gameManager.UpdateAll(clock.restart().asSeconds());
+
+
+	std::vector<Bullet*>::const_iterator itr = pl->bullets.begin();
+	while (itr != pl->bullets.end())
+	{
+		(*itr)->Draw(mainWindow);
+		itr++;
+	}
+	gameManager.DrawAll(GetRenderWindow());
+
 	GetRenderWindow().display();
 
 }
