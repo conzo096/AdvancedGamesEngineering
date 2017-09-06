@@ -10,7 +10,7 @@ public:
 	// Update the game object.
 	virtual void Update(float deltaTime);
 	// Draw the game object.
-	void Draw(sf::RenderWindow& renderWindow);
+	virtual void Draw(sf::RenderWindow& renderWindow);
 
 	sf::Sprite& GetSprite()
 	{

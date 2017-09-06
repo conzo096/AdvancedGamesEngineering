@@ -182,6 +182,7 @@ void Game::UpdateGame()
 			(*itr)->Draw(mainWindow);
 			itr++;
 		}
+
 		gameManager.DrawAll(GetRenderWindow());
 
 		if (gameManager.enemiesAlive == 0)

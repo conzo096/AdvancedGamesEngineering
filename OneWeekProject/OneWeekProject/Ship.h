@@ -7,7 +7,7 @@ class Ship :
 public:
 	Ship();
 	~Ship();
-
+	void Draw(sf::RenderWindow& renderWindow);
 	float GetHealth()
 	{
 		return health;

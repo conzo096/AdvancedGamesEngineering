@@ -46,9 +46,11 @@ void Bullet::Update(float deltaTime)
 		if (GetSprite().getGlobalBounds().intersects(itr->second->GetSprite().getGlobalBounds()))
 		{
 			if (itr->first != "Player")
+			{
 				Game::Instance()->GetGameManager().enemiesAlive--;
-			Game::Instance()->GetGameManager().GetGameObjects().erase(itr->first);
-			break;
+				Game::Instance()->GetGameManager().GetGameObjects().erase(itr->first);
+				break;
+			}
 		}
 		itr++;
 	}
