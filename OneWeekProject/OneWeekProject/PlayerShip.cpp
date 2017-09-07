@@ -67,26 +67,10 @@ void PlayerShip::Update(float deltaTime)
 		bullet->LoadSprite("Images/GameObjects/Bullet.png");
 		bullet->SetPosition(GetPosition().x + (GetSprite().getGlobalBounds().width/2), GetPosition().y- GetSprite().getGlobalBounds().height);
 		bullet->GetVelocity() = sf::Vector2f(0, -600);
-		//bullets.push_back(bullet);
 		Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
 	}
 
 
 	GetSprite().move(GetVelocity()*deltaTime);
-
-	//// Update all the bullets.
-	//std::vector<Bullet*>::iterator itr = GetBullets().begin();
-	//while (itr != GetBullets().end())
-	//{
-	//	if ((*itr)->toBeDeleted == false)
-	//		(*itr)->Update(deltaTime);
-	//	else
-	//	{
-	//		GetBullets().erase(itr);
-
-	//		break;
-	//	}
-	//	itr++;
-	//}
 
 }

@@ -1,5 +1,4 @@
-﻿  GameManager.cpp
-c:\users\40167111\desktop\advancedgamesengineering\oneweekproject\oneweekproject\gamemanager.cpp(60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\40167111\desktop\advancedgamesengineering\oneweekproject\oneweekproject\gamemanager.cpp(71): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  OneWeekProject.vcxproj -> C:\Users\40167111\Desktop\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.exe
-  OneWeekProject.vcxproj -> C:\Users\40167111\Desktop\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.pdb (Partial PDB)
+﻿  RangedEnemy.cpp
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\rangedenemy.cpp(27): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  OneWeekProject.vcxproj -> C:\Users\Conner\Documents\GitHub\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.exe
+  OneWeekProject.vcxproj -> C:\Users\Conner\Documents\GitHub\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.pdb (Partial PDB)

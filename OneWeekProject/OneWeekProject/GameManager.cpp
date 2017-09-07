@@ -56,6 +56,7 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 		RangedEnemy* enemy = new RangedEnemy();
 		enemy->LoadSprite("Images/GameObjects/EnemyShip1.png");
 		enemy->SetHealth(75);
+		enemy->GetSprite().setOrigin(sf::Vector2f(float(enemy->GetSprite().getTexture()->getSize().x) / 2, float(enemy->GetSprite().getTexture()->getSize().y) / 2));
 		// Need to add random feature to this (Spawn just out of view).
 		enemy->SetPosition(i*(Game::Instance()->GetScreenWidth()/enemiesToSpawn), 50);
 		std::string enemyName = "Enemy"+ std::to_string(i);
@@ -94,6 +95,7 @@ void GameManager::UpdateAll(float deltaTime)
 	while (it != bullets.end())
 	{
 		(*it)->Update(deltaTime);
+		it++;
 	}
 
 
@@ -124,6 +126,6 @@ void GameManager::DrawAll(sf::RenderWindow& renderWindow)
 	while (it != bullets.end())
 	{
 		(*it)->Draw(renderWindow);
-		itr++;
+		it++;
 	}
 }

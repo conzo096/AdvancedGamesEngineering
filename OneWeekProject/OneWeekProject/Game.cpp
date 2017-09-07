@@ -25,7 +25,7 @@ void Game::Start()
 	PlayerShip *player = new PlayerShip();
 	player->LoadSprite("Images/GameObjects/PlayerShip.png");
 	player->GetSprite().setOrigin(sf::Vector2f(float(player->GetSprite().getTexture()->getSize().x) / 2, float(player->GetSprite().getTexture()->getSize().y) / 2));
-	player->GetSprite().setPosition(5,5);
+	player->GetSprite().setPosition(screenWidth/2,screenHeight/2);
 	GetGameManager().AddObject("Player", player);
 	// Change the game state to display the splash logo.
 	SetGameState(showingSplashScreen);
@@ -171,13 +171,13 @@ void Game::UpdateGame()
 
 		GetRenderWindow().clear(sf::Color(255, 255, 255));
 
-		GetRenderWindow().draw(myText);
+	
 
 		gameManager.UpdateAll(physicsClock.restart().asSeconds());
 
 
 		gameManager.DrawAll(GetRenderWindow());
-
+		GetRenderWindow().draw(myText);
 		if (gameManager.enemiesAlive == 0)
 			gameManager.createNewWave = true;
 

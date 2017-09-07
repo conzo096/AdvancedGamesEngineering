@@ -50,7 +50,7 @@ void Bullet::Update(float deltaTime)
 				// This bullet is to be deleted.
 				toBeDeleted = true;
 				itr->second->toBeDeleted = true;
-				break;
+			//	break;
 			}
 		}
 		itr++;
