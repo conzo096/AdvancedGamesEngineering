@@ -45,10 +45,11 @@ void Bullet::Update(float deltaTime)
 		// Remove elements while iterating
 		if (GetSprite().getGlobalBounds().intersects(itr->second->GetSprite().getGlobalBounds()))
 		{
-			if (itr->first != "Player")
+			if (itr->first != "Player" || itr->first != belongsTo)
 			{
 				Game::Instance()->GetGameManager().enemiesAlive--;
-				Game::Instance()->GetGameManager().GetGameObjects().erase(itr->first);
+				toBeDeleted = true;
+				itr->second->toBeDeleted = true;
 				break;
 			}
 		}

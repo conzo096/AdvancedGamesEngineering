@@ -19,7 +19,8 @@ public:
 		return gameObjects;
 	}
 
-
+	// Players score.
+	int score;
 	// Wave player is on.
 	int wave;
 	// condition to spawn to new wave.

@@ -45,6 +45,7 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 		// Need to add random feature to this (Spawn just out of view).
 		enemy->SetPosition(50*i, 50);
 		std::string enemyName = "Enemy"+ std::to_string(i);
+		enemy->SetName(enemyName);
 		AddObject(enemyName, enemy);
 	}
 	wave++;
@@ -68,11 +69,21 @@ RenderableObject* GameManager::Get(std::string name) const
 
 void GameManager::UpdateAll(float deltaTime)
 {
-	std::map<std::string, RenderableObject*>::const_iterator itr = gameObjects.begin();
+	std::map<std::string, RenderableObject*>::iterator itr = gameObjects.begin();
 	while (itr != gameObjects.end())
 	{
 		itr->second->Update(deltaTime);
-		itr++;
+		if (itr != gameObjects.end())
+			itr++;
+	}
+
+	std::map<std::string, RenderableObject*>::iterator itr = gameObjects.begin();
+	while (itr != gameObjects.end())
+	{
+		if(itr->second->toBeDeleted == true)
+			gameObjects.erase(itr);
+		else
+			itr++;
 	}
 }
 

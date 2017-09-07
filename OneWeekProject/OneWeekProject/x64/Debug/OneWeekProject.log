@@ -1,3 +1,18 @@
-﻿  Bullet.cpp
-  OneWeekProject.vcxproj -> C:\Users\Conner\Documents\GitHub\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.exe
-  OneWeekProject.vcxproj -> C:\Users\Conner\Documents\GitHub\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.pdb (Partial PDB)
+﻿  GameManager.cpp
+c:\users\40167111\desktop\advancedgamesengineering\oneweekproject\oneweekproject\gamemanager.cpp(46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\40167111\desktop\advancedgamesengineering\oneweekproject\oneweekproject\gamemanager.cpp(57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\40167111\desktop\advancedgamesengineering\oneweekproject\oneweekproject\gamemanager.cpp(80): error C2374: 'itr': redefinition; multiple initialization
+  c:\users\40167111\desktop\advancedgamesengineering\oneweekproject\oneweekproject\gamemanager.cpp(72): note: see declaration of 'itr'
+c:\users\40167111\desktop\advancedgamesengineering\oneweekproject\oneweekproject\gamemanager.cpp(81): error C2088: '!=': illegal for class
+c:\users\40167111\desktop\advancedgamesengineering\oneweekproject\oneweekproject\gamemanager.cpp(83): error C2039: 'second': is not a member of 'std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<_Ty>>>'
+          with
+          [
+              _Ty=std::pair<const std::string,RenderableObject *>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\xtree(552): note: see declaration of 'std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<_Ty>>>'
+          with
+          [
+              _Ty=std::pair<const std::string,RenderableObject *>
+          ]
+c:\users\40167111\desktop\advancedgamesengineering\oneweekproject\oneweekproject\gamemanager.cpp(83): error C2227: left of '->toBeDeleted' must point to class/struct/union/generic type
+c:\users\40167111\desktop\advancedgamesengineering\oneweekproject\oneweekproject\gamemanager.cpp(86): error C2088: '++': illegal for class

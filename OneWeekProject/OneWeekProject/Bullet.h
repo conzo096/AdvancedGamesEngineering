@@ -8,5 +8,6 @@ public:
 
 	void Update(float deltaTime);
 	bool toBeDeleted =false;
+	std::string belongsTo;
 };
 

@@ -175,14 +175,6 @@ void Game::UpdateGame()
 		gameManager.UpdateAll(physicsClock.restart().asSeconds());
 
 
-		// Update ship Draw method to include bullets.
-		std::vector<Bullet*>::const_iterator itr = pl->GetBullets().begin();
-		while (itr != pl->GetBullets().end())
-		{
-			(*itr)->Draw(mainWindow);
-			itr++;
-		}
-
 		gameManager.DrawAll(GetRenderWindow());
 
 		if (gameManager.enemiesAlive == 0)

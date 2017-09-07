@@ -40,6 +40,8 @@ public:
 	virtual sf::Vector2f GetPosition() const;
 	// Condition to check status of the game object.
 	bool isActive;
+
+	bool toBeDeleted = false;
 protected:
 	sf::Vector2f velocity;
 	// Maxiumum velocity.
@@ -47,7 +49,6 @@ protected:
 
 	// Time the object has been alive.
 	float timeActive;
-
 
 private:
 	// Texture of the sprite.

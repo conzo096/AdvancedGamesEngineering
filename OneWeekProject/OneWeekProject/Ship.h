@@ -28,9 +28,23 @@ public:
 	{
 		return bullets;
 	}
+
+	std::string GetName()
+	{
+		return name;
+	}
+	void SetName(std::string shipName)
+	{
+		name = shipName;
+	}
+
+
 protected:
 	float health;
 	// Array of bullets the play has shot.
 	std::vector<Bullet*> bullets;
+	// Ships name.
+	std::string name;
+
 };
 
