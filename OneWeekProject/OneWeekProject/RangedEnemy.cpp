@@ -32,22 +32,24 @@ void RangedEnemy::Update(float deltaTime)
 			bullet->belongsTo = GetName();
 			bullet->SetPosition( GetPosition().x + (GetSprite().getGlobalBounds().width / 2), GetPosition().y - GetSprite().getGlobalBounds().height);
 			bullet->GetVelocity() = sf::Vector2f(towardsDirection);
-			bullets.push_back(bullet);
+			Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
+
+			//bullets.push_back(bullet);
 		}
 
-		// Update all the bullets.
-		std::vector<Bullet*>::iterator itr = GetBullets().begin();
-		while (itr != GetBullets().end())
-		{
-			if ((*itr)->toBeDeleted == false)
-				(*itr)->Update(deltaTime);
-			else
-			{
-				GetBullets().erase(itr);
-				break;
-			}
-			itr++;
-		}
+		//// Update all the bullets.
+		//std::vector<Bullet*>::iterator itr = GetBullets().begin();
+		//while (itr != GetBullets().end())
+		//{
+		//	if ((*itr)->toBeDeleted == false)
+		//		(*itr)->Update(deltaTime);
+		//	else
+		//	{
+		//		GetBullets().erase(itr);
+		//		break;
+		//	}
+		//	itr++;
+		//}
 
 
 		GetSprite().setRotation(angle);

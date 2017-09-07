@@ -17,10 +17,10 @@ void Ship::Draw(sf::RenderWindow& renderWindow)
 	{
 		renderWindow.draw(GetSprite());
 	}
-		std::vector<Bullet*>::const_iterator itr = GetBullets().begin();
-		while (itr != GetBullets().end())
-		{
-			(*itr)->Draw(renderWindow);
-			itr++;
-		}
+		//std::vector<Bullet*>::const_iterator itr = GetBullets().begin();
+		//while (itr != GetBullets().end())
+		//{
+		//	(*itr)->Draw(renderWindow);
+		//	itr++;
+		//}
 }

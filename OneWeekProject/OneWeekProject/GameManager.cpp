@@ -90,6 +90,13 @@ void GameManager::UpdateAll(float deltaTime)
 		itr++;
 	}
 	
+	std::vector<Bullet*>::iterator it = bullets.begin();
+	while (it != bullets.end())
+	{
+		(*it)->Update(deltaTime);
+	}
+
+
 	std::vector<std::string> deletedList;
 	for (auto it = gameObjects.cbegin(); it != gameObjects.cend();) 
 	{
@@ -110,6 +117,13 @@ void GameManager::DrawAll(sf::RenderWindow& renderWindow)
 	while (itr != gameObjects.end())
 	{
 		itr->second->Draw(renderWindow);
+		itr++;
+	}
+
+	std::vector<Bullet*>::iterator it = bullets.begin();
+	while (it != bullets.end())
+	{
+		(*it)->Draw(renderWindow);
 		itr++;
 	}
 }

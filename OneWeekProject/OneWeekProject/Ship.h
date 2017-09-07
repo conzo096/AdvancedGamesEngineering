@@ -24,10 +24,10 @@ public:
 	}
 
 	//Returns the vector of bullets.
-	std::vector<Bullet*>& GetBullets()
-	{
-		return bullets;
-	}
+	//std::vector<Bullet*>& GetBullets()
+	//{
+	//	return bullets;
+	//}
 
 	std::string GetName()
 	{
@@ -42,7 +42,7 @@ public:
 protected:
 	float health;
 	// Array of bullets the play has shot.
-	std::vector<Bullet*> bullets;
+//	std::vector<Bullet*> bullets;
 	// Ships name.
 	std::string name;
 
