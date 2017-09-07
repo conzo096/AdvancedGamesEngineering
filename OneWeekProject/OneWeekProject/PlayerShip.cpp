@@ -66,7 +66,7 @@ void PlayerShip::Update(float deltaTime)
 		Bullet* bullet = new Bullet();
 		bullet->LoadSprite("Images/GameObjects/Bullet.png");
 		bullet->SetPosition(GetPosition().x + (GetSprite().getGlobalBounds().width/2), GetPosition().y- GetSprite().getGlobalBounds().height);
-		bullet->GetVelocity() = sf::Vector2f(0, -300);
+		bullet->GetVelocity() = sf::Vector2f(0, -600);
 		bullets.push_back(bullet);
 	}
 

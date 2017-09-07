@@ -31,6 +31,20 @@ void GameManager::DeleteObject(std::string name)
 	}
 }
 
+void GameManager::DeleteObjects(std::vector<std::string> names)
+{
+	for (auto &i : names)
+	{
+		std::map<std::string, RenderableObject*>::iterator results = gameObjects.find(i);
+		if (results != gameObjects.end())
+		{
+			delete results->second;
+			gameObjects.erase(results);
+		}
+	}
+
+}
+
 
 // Spawn a new wave of enemies.
 void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
@@ -43,7 +57,7 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 		enemy->LoadSprite("Images/GameObjects/EnemyShip1.png");
 		enemy->SetHealth(75);
 		// Need to add random feature to this (Spawn just out of view).
-		enemy->SetPosition(50*i, 50);
+		enemy->SetPosition(i*(Game::Instance()->GetScreenWidth()/enemiesToSpawn), 50);
 		std::string enemyName = "Enemy"+ std::to_string(i);
 		enemy->SetName(enemyName);
 		AddObject(enemyName, enemy);
@@ -73,18 +87,21 @@ void GameManager::UpdateAll(float deltaTime)
 	while (itr != gameObjects.end())
 	{
 		itr->second->Update(deltaTime);
-		if (itr != gameObjects.end())
-			itr++;
+		itr++;
 	}
-
-	std::map<std::string, RenderableObject*>::iterator itr = gameObjects.begin();
-	while (itr != gameObjects.end())
+	
+	std::vector<std::string> deletedList;
+	for (auto it = gameObjects.cbegin(); it != gameObjects.cend();) 
 	{
-		if(itr->second->toBeDeleted == true)
-			gameObjects.erase(itr);
-		else
-			itr++;
+		if (it->second->toBeDeleted == true)
+		{
+			if(it->first != "Player")
+				Game::Instance()->GetGameManager().enemiesAlive--;
+			deletedList.push_back(it->first);
+		}
+		it++;
 	}
+	DeleteObjects(deletedList);
 }
 
 void GameManager::DrawAll(sf::RenderWindow& renderWindow)

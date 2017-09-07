@@ -47,7 +47,7 @@ void Bullet::Update(float deltaTime)
 		{
 			if (itr->first != "Player" || itr->first != belongsTo)
 			{
-				Game::Instance()->GetGameManager().enemiesAlive--;
+				// This bullet is to be deleted.
 				toBeDeleted = true;
 				itr->second->toBeDeleted = true;
 				break;

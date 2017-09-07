@@ -24,6 +24,7 @@ void Game::Start()
 	//Load in all the characters.
 	PlayerShip *player = new PlayerShip();
 	player->LoadSprite("Images/GameObjects/PlayerShip.png");
+	player->GetSprite().setOrigin(sf::Vector2f(float(player->GetSprite().getTexture()->getSize().x) / 2, float(player->GetSprite().getTexture()->getSize().y) / 2));
 	player->GetSprite().setPosition(5,5);
 	GetGameManager().AddObject("Player", player);
 	// Change the game state to display the splash logo.
