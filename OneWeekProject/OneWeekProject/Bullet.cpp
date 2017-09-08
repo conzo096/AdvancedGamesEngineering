@@ -2,10 +2,8 @@
 #include "Game.h"
 #include <iostream>
 
-Bullet::Bullet()
+Bullet::Bullet():speed(600)
 {
-
-
 }
 
 
@@ -42,16 +40,12 @@ void Bullet::Update(float deltaTime)
 	std::map<std::string, RenderableObject*>::iterator itr = Game::Instance()->GetGameManager().GetGameObjects().begin();
 	while (itr != Game::Instance()->GetGameManager().GetGameObjects().end())
 	{
-		// Remove elements while iterating
+		// If there is a collision delete both objects.
 		if (GetSprite().getGlobalBounds().intersects(itr->second->GetSprite().getGlobalBounds()))
 		{
-			if (itr->first != "Player" || itr->first != belongsTo)
-			{
 				// This bullet is to be deleted.
 				toBeDeleted = true;
 				itr->second->toBeDeleted = true;
-			//	break;
-			}
 		}
 		itr++;
 	}

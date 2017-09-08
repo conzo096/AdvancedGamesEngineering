@@ -12,7 +12,36 @@ public:
 	PowerUp();
 	~PowerUp();
 
+	PowerUpType GetPowerUpType() 
+	{
+		return powerUp;
+	}
+
+	void SetPowerUpType(PowerUpType type)
+	{
+		powerUp = type;
+	}
+
+	float GetDuration()
+	{
+		return duration;
+	}
+
+	void SetDuration(float dur)
+	{
+		duration = dur;
+	}
+	void ReduceDuration(float dur)
+	{
+		duration -= dur;
+	}
+
+
+
 private:
-	enum powerUpType;
+	// Type of power up.
+	PowerUpType powerUp;
+	// How long it is to last for.
+	float duration;
 };
 

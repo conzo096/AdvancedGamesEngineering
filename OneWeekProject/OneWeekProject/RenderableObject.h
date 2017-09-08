@@ -40,7 +40,8 @@ public:
 	virtual sf::Vector2f GetPosition() const;
 	// Condition to check status of the game object.
 	bool isActive;
-
+	// Value the ship has (This gets added to high score).
+	int scoreValue;
 	bool toBeDeleted = false;
 protected:
 	sf::Vector2f velocity;

@@ -1,7 +1,7 @@
 #include "GameManager.h"
 #include "RangedEnemy.h"
 #include "Game.h"
-
+#include "PowerUp.h"
 GameManager::GameManager()
 {
 }
@@ -64,6 +64,16 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 		AddObject(enemyName, enemy);
 	}
 	wave++;
+
+	if (wave == 1)
+	{
+		PowerUp* power = new PowerUp();
+		power->LoadSprite("Images/GameObjects/DualCannons.png");
+		power->SetPosition(200, 200);
+		power->SetPowerUpType(PowerUp::dualCannons);
+		power->SetDuration(15);
+		AddObject("PowerUpD", power);
+	}
 }
 
 
@@ -78,7 +88,6 @@ RenderableObject* GameManager::Get(std::string name) const
 	if (results == gameObjects.end())
 		return NULL;
 	return results->second;
-
 }
 
 
@@ -95,6 +104,10 @@ void GameManager::UpdateAll(float deltaTime)
 	while (it != bullets.end())
 	{
 		(*it)->Update(deltaTime);
+		//if ((*it)->toBeDeleted == true)
+		//{
+		//	(*it) = NULL;
+		//}
 		it++;
 	}
 
@@ -104,12 +117,16 @@ void GameManager::UpdateAll(float deltaTime)
 	{
 		if (it->second->toBeDeleted == true)
 		{
-			if(it->first != "Player")
+			if (it->first != "Player")
+			{
 				Game::Instance()->GetGameManager().enemiesAlive--;
+				Game::Instance()->GetGameManager().score += it->second->scoreValue;
+			}
 			deletedList.push_back(it->first);
 		}
 		it++;
 	}
+
 	DeleteObjects(deletedList);
 }
 

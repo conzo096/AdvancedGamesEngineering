@@ -7,7 +7,6 @@ class Ship :
 public:
 	Ship();
 	~Ship();
-	void Draw(sf::RenderWindow& renderWindow);
 	float GetHealth()
 	{
 		return health;
@@ -23,12 +22,6 @@ public:
 		health = val;
 	}
 
-	//Returns the vector of bullets.
-	//std::vector<Bullet*>& GetBullets()
-	//{
-	//	return bullets;
-	//}
-
 	std::string GetName()
 	{
 		return name;
@@ -40,11 +33,13 @@ public:
 
 
 protected:
+	// Health of the ship.
 	float health;
-	// Array of bullets the play has shot.
-//	std::vector<Bullet*> bullets;
 	// Ships name.
 	std::string name;
-
+	//Fire rate.
+	float fireRate;
+	//Time since last fire.
+	float cooldown;
 };
 

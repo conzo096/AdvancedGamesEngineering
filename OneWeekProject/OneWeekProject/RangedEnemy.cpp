@@ -2,9 +2,12 @@
 #include "PlayerShip.h"
 #include "Game.h"
 #include <math.h>
-
+#include "EnemyBullet.h"
 RangedEnemy::RangedEnemy()
 {
+	scoreValue = 50;
+	fireRate = 1.5f;
+	cooldown = 0.0f;
 }
 
 
@@ -31,16 +34,18 @@ void RangedEnemy::Update(float deltaTime)
 
 		if ((int)timeActive % 8 == 1)
 		{
-			Bullet* bullet = new Bullet();
-			bullet->LoadSprite("Images/GameObjects/Bullet.png");
-			bullet->belongsTo = GetName();
-			bullet->SetPosition(GetSprite().getPosition().x, GetSprite().getPosition().y);
-			//bullet->SetPosition( GetPosition().x + (GetSprite().getGlobalBounds().width / 2), GetPosition().y - GetSprite().getGlobalBounds().height);
-			// Normalise then times by Speed *Create bullet property*
-			bullet->GetVelocity() = sf::Vector2f(towardsDirection);
-			Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
+			if (cooldown <= 0)
+			{
+				EnemyBullet* bullet = new EnemyBullet();
+				bullet->LoadSprite("Images/GameObjects/Bullet.png");
+				bullet->belongsTo = GetName();
+				bullet->SetPosition(GetSprite().getPosition().x, GetSprite().getPosition().y);
+				// Normalise then times by Speed *Create bullet property*
+				bullet->GetVelocity() = sf::Vector2f(towardsDirection);
+				Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
+				cooldown = fireRate;
+			}
 		}
-
 	}
 	else
 	{

@@ -6,8 +6,9 @@ public:
 	Bullet();
 	~Bullet();
 
-	void Update(float deltaTime);
+	virtual void Update(float deltaTime);
 	bool toBeDeleted =false;
 	std::string belongsTo;
+	float speed;
 };
 

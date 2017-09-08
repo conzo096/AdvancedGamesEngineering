@@ -153,16 +153,46 @@ void Game::UpdateGame()
 		}
 		else
 		{
-			myText.setString("Where did the ship go?");
+			myText.setString("WHERE DID THE SHIP GO?");
 		}
 		// assign a size 
-		myText.setCharacterSize(15);
+		myText.setCharacterSize(20);
 
 		// Choose a color 
-		myText.setFillColor(sf::Color::White);
+		myText.setFillColor(sf::Color::Blue);
+		myText.setOrigin(myText.getString().getSize() / 2, myText.getScale().y / 2);
+		myText.setPosition(Game::Instance()->GetScreenWidth()*0.02, Game::Instance()->GetScreenHeight()*0.02);
 
 		// Set the font to our Text object 
 		myText.setFont(font);
+
+		sf::Text wave;
+
+		wave.setString(std::to_string(Game::Instance()->GetGameManager().wave));
+		wave.setCharacterSize(20);
+
+		// Choose a color 
+		wave.setFillColor(sf::Color::Blue);
+		wave.setOrigin(myText.getString().getSize() / 2, myText.getScale().y / 2);
+		wave.setPosition(Game::Instance()->GetScreenWidth()*0.9, Game::Instance()->GetScreenHeight()*0.02);
+
+		// Set the font to our Text object 
+		wave.setFont(font);	
+
+		sf::Text score;
+
+		score.setString(std::to_string(Game::Instance()->GetGameManager().score));
+		score.setCharacterSize(20);
+
+		// Choose a color 
+		score.setFillColor(sf::Color::Blue);
+		score.setOrigin(myText.getString().getSize() / 2, myText.getScale().y / 2);
+		score.setPosition(Game::Instance()->GetScreenWidth()*0.9, Game::Instance()->GetScreenHeight()*0.05);
+
+		// Set the font to our Text object 
+		score.setFont(font);
+
+
 
 		if (currentEvent.type == sf::Event::Closed)
 			SetGameState(Game::exiting);
@@ -178,6 +208,8 @@ void Game::UpdateGame()
 
 		gameManager.DrawAll(GetRenderWindow());
 		GetRenderWindow().draw(myText);
+		GetRenderWindow().draw(wave);
+		GetRenderWindow().draw(score);
 		if (gameManager.enemiesAlive == 0)
 			gameManager.createNewWave = true;
 
