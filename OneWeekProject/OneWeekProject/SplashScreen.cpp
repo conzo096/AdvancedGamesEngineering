@@ -37,5 +37,11 @@ void SplashScreen::Show(sf::RenderWindow & renderWindow)
 		{
 			return;
 		}
+		if (event.type == sf::Event::Resized)
+		{
+		//	Game::Instance()->SetScreenWidth(event.size.width);
+		//	Game::Instance()->SetScreenHeight(event.size.height);
+		
+		}
 	}
 }

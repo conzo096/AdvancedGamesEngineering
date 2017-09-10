@@ -1,4 +1,5 @@
 #include "EnemyBullet.h"
+#include "PlayerShip.h"
 #include "Game.h"
 
 
@@ -38,21 +39,18 @@ void EnemyBullet::Update(float deltaTime)
 		toBeDeleted = true;
 	}
 
-	//Check if it collides with the any object in game manger.
-	std::map<std::string, RenderableObject*>::iterator itr = Game::Instance()->GetGameManager().GetGameObjects().begin();
-	while (itr != Game::Instance()->GetGameManager().GetGameObjects().end())
+
+	PlayerShip* player = static_cast<PlayerShip*>(Game::Instance()->GetGameManager().GetGameObjects().find("Player")->second);
+	if(player != NULL)
 	{
 		// Remove elements while iterating
-		if (GetSprite().getGlobalBounds().intersects(itr->second->GetSprite().getGlobalBounds()))
+		if (GetSprite().getGlobalBounds().intersects(player->GetSprite().getGlobalBounds()))
 		{
-			if (itr->first.find("Enemy") == std::string::npos)
-			{
 				// This bullet is to be deleted.
 				toBeDeleted = true;
-				itr->second->toBeDeleted = true;
-			}
+				player->GetHealth() -=20;
+				return;
 		}
-		itr++;
 	}
 
 	GetSprite().move(velocity*deltaTime);

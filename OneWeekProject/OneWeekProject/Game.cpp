@@ -20,11 +20,12 @@ void Game::Start()
 	if (GetGameState() != uninitialized)
 		return;
 	// Create the initial window.
-	GetRenderWindow().create(sf::VideoMode(GetScreenWidth(), GetScreenHeight(), 32), "Week One Project!");
+
+	GetRenderWindow().create(sf::VideoMode(GetScreenWidth(), GetScreenHeight(), 32), "Week One Project!", sf::Style::Default);
+	SetView(sf::View(sf::FloatRect(0, 0, GetScreenWidth(),GetScreenHeight())));
+
 	//Load in all the characters.
 	PlayerShip *player = new PlayerShip();
-	player->LoadSprite("Images/GameObjects/PlayerShip.png");
-	player->GetSprite().setOrigin(sf::Vector2f(float(player->GetSprite().getTexture()->getSize().x) / 2, float(player->GetSprite().getTexture()->getSize().y) / 2));
 	player->GetSprite().setPosition(screenWidth/2,screenHeight/2);
 	GetGameManager().AddObject("Player", player);
 	// Change the game state to display the splash logo.
@@ -192,12 +193,17 @@ void Game::UpdateGame()
 		// Set the font to our Text object 
 		score.setFont(font);
 
-
-
 		if (currentEvent.type == sf::Event::Closed)
 			SetGameState(Game::exiting);
 		if (currentEvent.key.code == sf::Keyboard::Escape)
 			SetGameState(Game::paused);
+		if (currentEvent.type == sf::Event::Resized)
+		{
+		//	SetScreenWidth(currentEvent.size.width);
+		//	SetScreenHeight(currentEvent.size.height);
+			//GetRenderWindow().setView(sf::View(sf::FloatRect(0, 0, GetScreenWidth(), GetScreenHeight())));
+		}
+
 
 		GetRenderWindow().clear(sf::Color(255, 255, 255));
 

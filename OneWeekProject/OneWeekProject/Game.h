@@ -59,10 +59,19 @@ public:
 		return gameManager;
 	}
 
+	sf::View GetView()
+	{
+		return view;
+	}
+	void SetView(sf::View v)
+	{
+		view = v;
+	}
 
 	// Start the game engine.
 	void Start();
-
+	//Reset the game.
+	void ResetGame();
 private:
 	
 	// Singleton instance of the game engine.
@@ -74,6 +83,8 @@ private:
 
 	// What state the window is currently in.
 	GameState gameState;
+	// View
+	sf::View view;
 	// Width and height of the screen.
 	int screenWidth;
 	int screenHeight;

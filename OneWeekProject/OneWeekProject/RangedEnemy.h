@@ -6,5 +6,7 @@ public:
 	RangedEnemy();
 	~RangedEnemy();
 	void Update(float deltaTime);
+
+
 };
 

@@ -21,7 +21,7 @@ public:
 		return gameObjects;
 	}
 
-	std::vector<Bullet*>& GetBullets()
+	std::list<Bullet*>& GetBullets()
 	{
 		return bullets;
 	}
@@ -40,7 +40,7 @@ private:
 	// Entity manager.
 	std::map<std::string, RenderableObject*> gameObjects;
 	// List of all the bullets in the scene.
-	std::vector<Bullet*> bullets;
+	std::list<Bullet*> bullets;
 
 	struct GameObjectDeallocator
 	{
