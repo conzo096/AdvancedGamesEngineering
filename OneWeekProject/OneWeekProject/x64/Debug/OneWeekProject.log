@@ -1,5 +1,3 @@
-﻿  MainMenu.cpp
-c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\mainmenu.cpp(30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\mainmenu.cpp(38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  OneWeekProject.vcxproj -> C:\Users\Conner\Documents\GitHub\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.exe
-  OneWeekProject.vcxproj -> C:\Users\Conner\Documents\GitHub\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.pdb (Partial PDB)
+﻿  PlayerBullet.cpp
+  OneWeekProject.vcxproj -> C:\Users\40167111\Desktop\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.exe
+  OneWeekProject.vcxproj -> C:\Users\40167111\Desktop\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.pdb (Partial PDB)

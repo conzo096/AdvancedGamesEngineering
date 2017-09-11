@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "GameManager.h"
+#include "SFML/Audio.hpp"
 class Game
 {
 public:

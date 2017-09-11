@@ -1,9 +1,12 @@
 #include "PlayerBullet.h"
 #include "Game.h"
-
+#include "PowerUp.h"
+#include "RangedEnemy.h"
 
 PlayerBullet::PlayerBullet()
 {
+	damage = 30005;
+	LoadSprite("Images/GameObjects/Bullet.png");
 }
 
 
@@ -44,9 +47,27 @@ void PlayerBullet::Update(float deltaTime)
 		{
 			if (strstr(itr->first.c_str(), "Enemy"))
 			{
+				RangedEnemy* enemy = static_cast<RangedEnemy*>
+					(Game::Instance()->GetGameManager().Get(itr->first));
+				enemy->AddHealth(-damage);
 				// This bullet is to be deleted.
 				toBeDeleted = true;
-				itr->second->toBeDeleted = true;
+				if (enemy->GetHealth() <= 0)
+				{
+
+					Game::Instance()->GetGameManager().PlayClip("Audio/kaboom.wav");
+					itr->second->toBeDeleted = true;
+					if (rand() % 10 == 0)
+					{
+						PowerUp* power = new PowerUp();
+						power->LoadSprite("Images/GameObjects/DualCannons.png");
+						power->SetPosition(GetPosition().x, GetPosition().y);
+						PowerUp::PowerUpType type = static_cast<PowerUp::PowerUpType>(rand() % 3);
+						power->SetPowerUpType(type);
+						power->SetDuration(5);
+						Game::Instance()->GetGameManager().AddObject("PowerUpA", power);
+					}
+				}
 			}
 		}
 		itr++;

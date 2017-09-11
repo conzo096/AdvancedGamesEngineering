@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C7FB69D-9675-4F63-AAE5-CC15EF993A02}</ProjectGuid>
     <RootNamespace>OneWeekProject</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -40,7 +40,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -120,13 +120,18 @@
     <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GraphicsMenu.h" />
+    <ClInclude Include="IAudioProvider.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="PlayerShip.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="RangedEnemy.h" />
     <ClInclude Include="RenderableObject.h" />
+    <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="SFMLSoundProvider.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="SoundFileCache.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -136,6 +141,7 @@
     <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GraphicsMenu.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
@@ -143,7 +149,10 @@
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RangedEnemy.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
+    <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="SFMLSoundProvider.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="SoundFileCache.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -2,6 +2,8 @@
 #include "stdafx.h"
 #include "RenderableObject.h"
 #include "Bullet.h"
+#include "SFMLSoundProvider.h"
+#include "ServiceLocator.h"
 class GameManager
 {
 public:
@@ -15,7 +17,7 @@ public:
 	void AddObject(std::string name,RenderableObject* gameObject);
 	void DeleteObject(std::string name);
 	void DeleteObjects(std::vector<std::string> names);
-
+	void DeleteAll();
 	std::map<std::string, RenderableObject*>& GetGameObjects()
 	{
 		return gameObjects;
@@ -33,14 +35,19 @@ public:
 	bool createNewWave = true;
 	// How many enemies are alive.
 	int enemiesAlive;
-
 	void SpawnWave(sf::RenderWindow& renderWindow);
 
+	void PlaySong(std::string filePath, bool loop = true);
+	void PlayClip(std::string filePath);
 private:
 	// Entity manager.
 	std::map<std::string, RenderableObject*> gameObjects;
 	// List of all the bullets in the scene.
 	std::list<Bullet*> bullets;
+	// Audio Manager.
+	SFMLSoundProvider soundProvider;
+
+
 
 	struct GameObjectDeallocator
 	{

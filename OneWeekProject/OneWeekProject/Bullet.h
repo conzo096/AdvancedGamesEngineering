@@ -10,5 +10,6 @@ public:
 	bool toBeDeleted =false;
 	std::string belongsTo;
 	float speed;
+	float damage;
 };
 

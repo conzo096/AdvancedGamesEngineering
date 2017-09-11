@@ -9,10 +9,6 @@ public:
 	~PlayerShip();
 	void Update(float deltaTime);
 
-	float &GetHealth()
-	{
-		return health;
-	}
 
 private:
 	// What type of power up does the player has?

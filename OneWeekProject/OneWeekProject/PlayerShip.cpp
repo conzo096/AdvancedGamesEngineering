@@ -18,7 +18,7 @@ PlayerShip::PlayerShip():power()
 
 PlayerShip::~PlayerShip()
 {
-
+	//delete power;
 }
 
 void RenderableObject::SetPosition(float x, float y)
@@ -38,7 +38,11 @@ void PlayerShip::Update(float deltaTime)
 	if(cooldown >=0)
 		cooldown -= deltaTime;
 	if (health <= 0)
+	{
 		toBeDeleted = true;
+		//delete power;
+	//	Game::Instance()->ResetGame();
+	}
 	if (power != NULL)
 	{
 		power->ReduceDuration(deltaTime);
@@ -71,6 +75,66 @@ void PlayerShip::Update(float deltaTime)
 		movement.x+=600;
 	}
 
+	// Check if controller is connected.
+	if (sf::Joystick::isConnected(0))
+	{
+		// If it is, handle movement.
+		float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+		if (x >15 || x <-15)
+			movement.x += x*5;
+		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+		if (y >15 || y<-15)
+			movement.y = y*5;
+
+		if (sf::Joystick::isButtonPressed(0, sf::Joystick::Z))
+		{
+			if (cooldown <= 0)
+			{
+				if (power == NULL)
+				{
+					PlayerBullet* bullet = new PlayerBullet();
+					bullet->SetPosition(GetPosition().x + (GetSprite().getGlobalBounds().width / 2), GetPosition().y - GetSprite().getGlobalBounds().height);
+					bullet->GetVelocity() = sf::Vector2f(0, -600);
+					Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
+				}
+				else if (power != NULL)
+				{
+					if (power->GetPowerUpType() == PowerUp::dualCannons)
+					{
+						PlayerBullet* bullet = new PlayerBullet();
+						bullet->SetPosition(GetPosition().x + (GetSprite().getGlobalBounds().width), GetPosition().y - GetSprite().getGlobalBounds().height);
+						bullet->GetVelocity() = sf::Vector2f(0, -bullet->speed);
+						Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
+
+						PlayerBullet* bullet1 = new PlayerBullet();
+						bullet1->SetPosition(GetPosition().x - (GetSprite().getGlobalBounds().width), GetPosition().y - GetSprite().getGlobalBounds().height);
+						bullet1->GetVelocity() = sf::Vector2f(0, -bullet1->speed);
+						Game::Instance()->GetGameManager().GetBullets().push_back(bullet1);
+					}
+					else if (power->GetPowerUpType() == PowerUp::tripleCannons)
+					{
+						PlayerBullet* bullet = new PlayerBullet();
+						bullet->SetPosition(GetPosition().x + (GetSprite().getGlobalBounds().width / 2), GetPosition().y - GetSprite().getGlobalBounds().height);
+						bullet->GetVelocity() = sf::Vector2f(0, -bullet->speed);
+						Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
+
+						PlayerBullet* bullet1 = new PlayerBullet();
+						bullet1->SetPosition(GetPosition().x + (GetSprite().getGlobalBounds().width), GetPosition().y - GetSprite().getGlobalBounds().height);
+						bullet1->GetVelocity() = sf::Vector2f(0, -bullet1->speed);
+						Game::Instance()->GetGameManager().GetBullets().push_back(bullet1);
+
+						PlayerBullet* bullet2 = new PlayerBullet();
+						bullet2->SetPosition(GetPosition().x - (GetSprite().getGlobalBounds().width), GetPosition().y - GetSprite().getGlobalBounds().height);
+						bullet2->GetVelocity() = sf::Vector2f(0, -bullet2->speed);
+						Game::Instance()->GetGameManager().GetBullets().push_back(bullet2);
+					}
+				}
+				cooldown = fireRate;
+			}
+		}
+	}
+
+
 	sf::Vector2f pos = GetPosition();
 	sf::FloatRect bounds(sf::Vector2f(0.f, 0.f), Game::Instance()->GetRenderWindow().getDefaultView().getSize());
 
@@ -99,7 +163,6 @@ void PlayerShip::Update(float deltaTime)
 			if (power == NULL)
 			{
 				PlayerBullet* bullet = new PlayerBullet();
-				bullet->LoadSprite("Images/GameObjects/Bullet.png");
 				bullet->SetPosition(GetPosition().x + (GetSprite().getGlobalBounds().width / 2), GetPosition().y - GetSprite().getGlobalBounds().height);
 				bullet->GetVelocity() = sf::Vector2f(0, -600);
 				Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
@@ -109,13 +172,11 @@ void PlayerShip::Update(float deltaTime)
 				if (power->GetPowerUpType() == PowerUp::dualCannons)
 				{
 					PlayerBullet* bullet = new PlayerBullet();
-					bullet->LoadSprite("Images/GameObjects/Bullet.png");
 					bullet->SetPosition(GetPosition().x + (GetSprite().getGlobalBounds().width), GetPosition().y - GetSprite().getGlobalBounds().height);
 					bullet->GetVelocity() = sf::Vector2f(0, -bullet->speed);
 					Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
 
 					PlayerBullet* bullet1 = new PlayerBullet();
-					bullet1->LoadSprite("Images/GameObjects/Bullet.png");
 					bullet1->SetPosition(GetPosition().x - (GetSprite().getGlobalBounds().width), GetPosition().y - GetSprite().getGlobalBounds().height);
 					bullet1->GetVelocity() = sf::Vector2f(0, -bullet1->speed);
 					Game::Instance()->GetGameManager().GetBullets().push_back(bullet1);
@@ -123,19 +184,16 @@ void PlayerShip::Update(float deltaTime)
 				else if (power->GetPowerUpType() == PowerUp::tripleCannons)
 				{
 					PlayerBullet* bullet = new PlayerBullet();
-					bullet->LoadSprite("Images/GameObjects/Bullet.png");
 					bullet->SetPosition(GetPosition().x + (GetSprite().getGlobalBounds().width/2), GetPosition().y - GetSprite().getGlobalBounds().height);
 					bullet->GetVelocity() = sf::Vector2f(0, -bullet->speed);
 					Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
 
 					PlayerBullet* bullet1 = new PlayerBullet();
-					bullet1->LoadSprite("Images/GameObjects/Bullet.png");
 					bullet1->SetPosition(GetPosition().x + (GetSprite().getGlobalBounds().width), GetPosition().y - GetSprite().getGlobalBounds().height);
 					bullet1->GetVelocity() = sf::Vector2f(0, -bullet1->speed);
 					Game::Instance()->GetGameManager().GetBullets().push_back(bullet1);
 
 					PlayerBullet* bullet2 = new PlayerBullet();
-					bullet2->LoadSprite("Images/GameObjects/Bullet.png");
 					bullet2->SetPosition(GetPosition().x - (GetSprite().getGlobalBounds().width), GetPosition().y - GetSprite().getGlobalBounds().height);
 					bullet2->GetVelocity() = sf::Vector2f(0, -bullet2->speed);
 					Game::Instance()->GetGameManager().GetBullets().push_back(bullet2);

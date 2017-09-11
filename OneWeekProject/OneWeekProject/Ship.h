@@ -19,7 +19,7 @@ public:
 
 	void AddHealth(float val)
 	{
-		health = val;
+		health += val;
 	}
 
 	std::string GetName()

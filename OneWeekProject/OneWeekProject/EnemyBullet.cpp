@@ -5,6 +5,7 @@
 
 EnemyBullet::EnemyBullet()
 {
+	damage = 20;
 }
 
 
@@ -40,17 +41,21 @@ void EnemyBullet::Update(float deltaTime)
 	}
 
 
-	PlayerShip* player = static_cast<PlayerShip*>(Game::Instance()->GetGameManager().GetGameObjects().find("Player")->second);
+	PlayerShip* player = static_cast<PlayerShip*>(Game::Instance()->GetGameManager().Get("Player"));
 	if(player != NULL)
 	{
 		// Remove elements while iterating
-		if (GetSprite().getGlobalBounds().intersects(player->GetSprite().getGlobalBounds()))
+		if (GetSprite().getGlobalBounds().intersects(player->GetSprite().getGlobalBounds()) && !player->toBeDeleted)
 		{
 				// This bullet is to be deleted.
 				toBeDeleted = true;
-				player->GetHealth() -=20;
+				player->AddHealth(-damage);
 				return;
 		}
+	}
+	else
+	{
+		return;
 	}
 
 	GetSprite().move(velocity*deltaTime);

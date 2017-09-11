@@ -3,6 +3,9 @@
 #include "SplashScreen.h"
 #include "MainMenu.h"
 #include "PlayerShip.h"
+#include "SFMLSoundProvider.h"
+#include "ServiceLocator.h"
+
 Game *Game::instance = 0;
 
 
@@ -20,9 +23,9 @@ void Game::Start()
 	if (GetGameState() != uninitialized)
 		return;
 	// Create the initial window.
-
 	GetRenderWindow().create(sf::VideoMode(GetScreenWidth(), GetScreenHeight(), 32), "Week One Project!", sf::Style::Default);
 	SetView(sf::View(sf::FloatRect(0, 0, GetScreenWidth(),GetScreenHeight())));
+
 
 	//Load in all the characters.
 	PlayerShip *player = new PlayerShip();
@@ -31,6 +34,22 @@ void Game::Start()
 	// Change the game state to display the splash logo.
 	SetGameState(showingSplashScreen);
 	GameLoop();
+}
+
+void Game::ResetGame()
+{
+	GetGameManager().DeleteAll();
+
+	// Reset score,wave and time.
+	GetGameManager().score = 0;
+	GetGameManager().wave = 0;
+	// Allow new wave to be spawned.
+	GetGameManager().createNewWave = true;
+
+	//Load in all the characters.
+	PlayerShip *player = new PlayerShip();
+	player->GetSprite().setPosition(screenWidth / 2, screenHeight / 2);
+	GetGameManager().AddObject("Player", player);
 }
 
 
@@ -196,7 +215,11 @@ void Game::UpdateGame()
 		if (currentEvent.type == sf::Event::Closed)
 			SetGameState(Game::exiting);
 		if (currentEvent.key.code == sf::Keyboard::Escape)
+		{
 			SetGameState(Game::paused);
+			ResetGame();
+			return;
+		}
 		if (currentEvent.type == sf::Event::Resized)
 		{
 		//	SetScreenWidth(currentEvent.size.width);
