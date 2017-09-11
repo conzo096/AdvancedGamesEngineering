@@ -5,7 +5,7 @@
 #include "PlayerShip.h"
 #include "SFMLSoundProvider.h"
 #include "ServiceLocator.h"
-
+#include "GraphicsMenu.h"
 Game *Game::instance = 0;
 
 
@@ -115,6 +115,11 @@ void Game::ShowMainMenu()
 			SetGameState(Game::playing);
 			break;
 		}
+		case::MainMenu::showGraphicsOption:
+		{
+			SetGameState(Game::showingGraphicsMenu);
+			break;
+		}
 		case MainMenu::exitApplication:
 		{
 			SetGameState(Game::exiting);
@@ -125,27 +130,32 @@ void Game::ShowMainMenu()
 
 void Game::ShowPauseScreen()
 {
-
-	Instance()->ShowMainMenu();
-	/*GetRenderWindow().clear(sf::Color(0, 255, 255));
-	GetRenderWindow().display();
-	sf::Event currentEvent;
-	while (GetRenderWindow().pollEvent(currentEvent))
+	ShowMainMenu();
+	/*GraphicsOption options;
+	GraphicsOption::MenuResult result = options.Show(mainWindow);
+	switch (result)
 	{
-		if (currentEvent.type == sf::Event::EventType::KeyPressed
-			|| currentEvent.type == sf::Event::EventType::MouseButtonPressed
-			|| currentEvent.type == sf::Event::EventType::Closed)
+		case GraphicsOption::exitMenu:
 		{
-			SetGameState(playing);
+			SetGameState(Game::playing);
+			break;
 		}
 	}*/
 }
 
-//Not yet implemented.
+
 void Game::ShowGraphicsMenu()
 {
-	GetRenderWindow().clear(sf::Color(255, 255, 0));
-	GetRenderWindow().display();
+	GraphicsOption options;
+	GraphicsOption::MenuResult result = options.Show(mainWindow);
+	switch (result)
+	{
+	case GraphicsOption::exitMenu:
+	{
+		SetGameState(Game::showingMainMenu);
+		break;
+	}
+	}
 }
 
 // This handles the actual game logic. What actually happens when the game
