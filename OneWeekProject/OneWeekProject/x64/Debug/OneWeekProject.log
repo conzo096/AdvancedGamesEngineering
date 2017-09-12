@@ -1,2 +1,19 @@
-﻿  OneWeekProject.vcxproj -> C:\Users\Conner\Documents\GitHub\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.exe
+﻿  MainMenu.cpp
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\mainmenu.cpp(13): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\mainmenu.cpp(22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\mainmenu.cpp(29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\mainmenu.cpp(93): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\mainmenu.cpp(126): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Game.cpp
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\game.cpp(28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\game.cpp(33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\game.cpp(52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\game.cpp(184): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\game.cpp(185): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\game.cpp(197): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\game.cpp(198): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\game.cpp(210): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+c:\users\conner\documents\github\advancedgamesengineering\oneweekproject\oneweekproject\game.cpp(211): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  OneWeekProject.vcxproj -> C:\Users\Conner\Documents\GitHub\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.exe
   OneWeekProject.vcxproj -> C:\Users\Conner\Documents\GitHub\AdvancedGamesEngineering\OneWeekProject\x64\Debug\OneWeekProject.pdb (Partial PDB)

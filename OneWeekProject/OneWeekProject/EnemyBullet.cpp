@@ -28,20 +28,20 @@ void EnemyBullet::Update(float deltaTime)
 	}
 	// Calculate if the move would result in ship being off screen.
 	if (pos.x  < GetSprite().getScale().x
-		|| pos.x >(Game::Instance()->GetScreenWidth() - GetSprite().getGlobalBounds().width))
+		|| pos.x >(Game::GetScreenWidth() - GetSprite().getGlobalBounds().width))
 	{
 		isActive = false;
 		toBeDeleted = true;
 	}
 	if (pos.y  < GetSprite().getScale().y
-		|| pos.y >(Game::Instance()->GetScreenHeight() - GetSprite().getGlobalBounds().height))
+		|| pos.y >(Game::GetScreenHeight() - GetSprite().getGlobalBounds().height))
 	{
 		isActive = false;
 		toBeDeleted = true;
 	}
 
 
-	PlayerShip* player = static_cast<PlayerShip*>(Game::Instance()->GetGameManager().Get("Player"));
+	PlayerShip* player = static_cast<PlayerShip*>(Game::GetGameManager().Get("Player"));
 	if(player != NULL)
 	{
 		// Remove elements while iterating

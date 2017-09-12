@@ -6,6 +6,7 @@
 #include "SFMLSoundProvider.h"
 #include "ServiceLocator.h"
 #include "GraphicsMenu.h"
+#include <iostream>
 Game *Game::instance = 0;
 
 
@@ -67,27 +68,27 @@ void Game::GameLoop()
 		{
 			case showingSplashScreen:
 			{
-				Instance()->ShowSplashScreen();
+				ShowSplashScreen();
 				break;
 			}
 			case showingMainMenu:
 			{
-				Instance()->ShowMainMenu();
+				ShowMainMenu();
 				break;
 			}
 			case showingGraphicsMenu:
 			{
-				Instance()->ShowGraphicsMenu();
+				ShowGraphicsMenu();
 				break;
 			}
 			case paused:
 			{
-				Instance()->ShowPauseScreen();
+				ShowPauseScreen();
 				break;
 			}
 			case playing:
 			{
-				Instance()->UpdateGame();
+				UpdateGame();
 				break;
 			}
 		}
@@ -131,16 +132,6 @@ void Game::ShowMainMenu()
 void Game::ShowPauseScreen()
 {
 	ShowMainMenu();
-	/*GraphicsOption options;
-	GraphicsOption::MenuResult result = options.Show(mainWindow);
-	switch (result)
-	{
-		case GraphicsOption::exitMenu:
-		{
-			SetGameState(Game::playing);
-			break;
-		}
-	}*/
 }
 
 
@@ -150,11 +141,16 @@ void Game::ShowGraphicsMenu()
 	GraphicsOption::MenuResult result = options.Show(mainWindow);
 	switch (result)
 	{
-	case GraphicsOption::exitMenu:
-	{
-		SetGameState(Game::showingMainMenu);
-		break;
-	}
+		case::GraphicsOption::nothing:
+		{
+			SetGameState(Game::showingGraphicsMenu);
+			break;
+		}
+		case GraphicsOption::exitMenu:
+		{
+			SetGameState(Game::showingMainMenu);
+			break;
+		}
 	}
 }
 
@@ -191,39 +187,37 @@ void Game::UpdateGame()
 		// Choose a color 
 		myText.setFillColor(sf::Color::Blue);
 		myText.setOrigin(myText.getString().getSize() / 2, myText.getScale().y / 2);
-		myText.setPosition(Game::Instance()->GetScreenWidth()*0.02, Game::Instance()->GetScreenHeight()*0.02);
+		myText.setPosition(Game::GetScreenWidth()*0.02, Game::GetScreenHeight()*0.02);
 
 		// Set the font to our Text object 
 		myText.setFont(font);
 
 		sf::Text wave;
 
-		wave.setString(std::to_string(Game::Instance()->GetGameManager().wave));
+		wave.setString(std::to_string(Game::GetGameManager().wave));
 		wave.setCharacterSize(20);
 
 		// Choose a color 
 		wave.setFillColor(sf::Color::Blue);
 		wave.setOrigin(myText.getString().getSize() / 2, myText.getScale().y / 2);
-		wave.setPosition(Game::Instance()->GetScreenWidth()*0.9, Game::Instance()->GetScreenHeight()*0.02);
+		wave.setPosition(Game::GetScreenWidth()*0.9, Game::GetScreenHeight()*0.02);
 
 		// Set the font to our Text object 
 		wave.setFont(font);	
 
 		sf::Text score;
 
-		score.setString(std::to_string(Game::Instance()->GetGameManager().score));
+		score.setString(std::to_string(Game::GetGameManager().score));
 		score.setCharacterSize(20);
 
 		// Choose a color 
 		score.setFillColor(sf::Color::Blue);
 		score.setOrigin(myText.getString().getSize() / 2, myText.getScale().y / 2);
-		score.setPosition(Game::Instance()->GetScreenWidth()*0.9, Game::Instance()->GetScreenHeight()*0.05);
+		score.setPosition(Game::GetScreenWidth()*0.9, Game::GetScreenHeight()*0.05);
 
 		// Set the font to our Text object 
 		score.setFont(font);
 
-		if (currentEvent.type == sf::Event::Closed)
-			SetGameState(Game::exiting);
 		if (currentEvent.key.code == sf::Keyboard::Escape)
 		{
 			SetGameState(Game::paused);

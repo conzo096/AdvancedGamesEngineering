@@ -2,7 +2,6 @@
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
 #include "Game.h"
-
 MainMenu::MainMenu()
 {
 	textFont.loadFromFile("Fonts/Cracked Code.ttf");
@@ -10,7 +9,7 @@ MainMenu::MainMenu()
 	MenuItem playButton;
 	playButton.action = playGame;
 	playButton.text.setFont(textFont);
-	playButton.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, Game::Instance()->Game::GetScreenHeight() / 4);
+	playButton.text.setPosition(Game::Game::GetScreenWidth() / 2, Game::Game::GetScreenHeight() / 4);
 	playButton.text.setString("PLAY GAME!");
 	if(sf::Joystick::isConnected(0))
 		playButton.text.setFillColor(sf::Color::Blue);
@@ -19,14 +18,14 @@ MainMenu::MainMenu()
 	MenuItem optionsButton;
 	optionsButton.action = showGraphicsOption;
 	optionsButton.text.setFont(textFont);
-	optionsButton.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, 2*(Game::Instance()->Game::GetScreenHeight() / 4));
+	optionsButton.text.setPosition(Game::Game::GetScreenWidth() / 2, 2*(Game::Game::GetScreenHeight() / 4));
 	optionsButton.text.setString("OPTIONS");
 
 	//Exit menu item coordinates
 	MenuItem exitButton;
 	exitButton.action = exitApplication;
 	exitButton.text.setFont(textFont);
-	exitButton.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, 3 * (Game::Instance()->Game::GetScreenHeight() / 4));
+	exitButton.text.setPosition(Game::Game::GetScreenWidth() / 2, 3 * (Game::Game::GetScreenHeight() / 4));
 	exitButton.text.setString("EXIT GAME");
 
 	options.push_back(playButton);
@@ -52,26 +51,18 @@ MainMenu::MenuResult MainMenu::GetMenuResponse(sf::RenderWindow & renderWindow)
 	sf::Event menuEvent;
 	while (true)
 	{
+		DrawMenu(renderWindow);
 		renderWindow.pollEvent(menuEvent);
 		if (menuEvent.type == sf::Event::MouseMoved)
 		{
 			for (MenuItem& o : options)
 			{
-				if (o.text.getGlobalBounds().contains(menuEvent.mouseMove.x, menuEvent.mouseMove.y))
+				if (o.text.getGlobalBounds().contains(Game::GetRenderWindow().mapPixelToCoords(sf::Vector2i(menuEvent.mouseButton.x, menuEvent.mouseButton.y))))
 					o.text.setFillColor(sf::Color::Blue);
 			}
 			DrawMenu(renderWindow);
 		}
-		if (menuEvent.type == sf::Event::MouseButtonPressed)
-		{
-			return HandleClick(menuEvent.mouseButton.x, menuEvent.mouseButton.y);
-		}
-		if (menuEvent.type == sf::Event::Closed)
-		{
-			return exitApplication;
-		}
-
-		renderWindow.pollEvent(menuEvent);
+	
 		MenuResult res = nothing;
 		if (menuEvent.type == sf::Event::MouseButtonPressed)
 		{
@@ -84,23 +75,22 @@ MainMenu::MenuResult MainMenu::GetMenuResponse(sf::RenderWindow & renderWindow)
 		if (res != nothing)
 			return res;
 	}
-	return nothing;
+
+
 }
 
 MainMenu::MenuResult MainMenu::HandleClick(int x, int y)
 {
 	std::vector<MenuItem>::iterator it;
-
 	for (it = options.begin(); it != options.end(); it++)
 	{
 		sf::Text text = (*it).text;
-
-		if (text.getGlobalBounds().contains(Game::Instance()->GetRenderWindow().mapPixelToCoords(sf::Vector2i(x, y))))
+		if (text.getGlobalBounds().contains(Game::GetRenderWindow().mapPixelToCoords(sf::Vector2i(x,y))))
 		{
+
 			return (*it).action;
 		}
 	}
-
 	return nothing;
 }
 
@@ -122,7 +112,7 @@ MainMenu::MenuResult MainMenu::HandleController()
 				tracker = 0;
 			res = options.at(tracker).action;
 			options.at(tracker).text.setFillColor(sf::Color::Blue);
-			DrawMenu(Game::Instance()->GetRenderWindow());
+			DrawMenu(Game::GetRenderWindow());
 			return nothing;
 		}
 		else if (y < -15)
@@ -132,7 +122,7 @@ MainMenu::MenuResult MainMenu::HandleController()
 				tracker = options.size() - 1;
 			res = options.at(tracker).action;
 			options.at(tracker).text.setFillColor(sf::Color::Blue);
-			DrawMenu(Game::Instance()->GetRenderWindow());
+			DrawMenu(Game::GetRenderWindow());
 			return nothing;
 		}
 
@@ -152,7 +142,7 @@ void MainMenu::DrawMenu(sf::RenderWindow & renderWindow)
 	sf::Texture image;
 	image.loadFromFile("images/MainMenu.png");
 	sf::Sprite sprite(image);
-	sprite.setScale(sf::Vector2f(float(image.getSize().x) / Game::Instance()->GetScreenWidth(), float(image.getSize().y) / Game::Instance()->GetScreenHeight()));
+	sprite.setScale(sf::Vector2f(float(image.getSize().x) / Game::GetScreenWidth(), float(image.getSize().y) / Game::GetScreenHeight()));
 
 
 	renderWindow.draw(sprite);

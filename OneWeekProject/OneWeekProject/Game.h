@@ -19,54 +19,54 @@ public:
 			instance = new Game();
 		return instance;
 	}
-	GameState GetGameState()
+	static GameState GetGameState()
 	{
 		return instance->gameState;
 	}
-	void SetGameState(GameState state)
+	static void SetGameState(GameState state)
 	{
 		instance->gameState = state;
 	}
-	int GetScreenWidth()
+	static int GetScreenWidth()
 	{
 		return instance->screenWidth;
 	}
-	void SetScreenWidth(int width)
+	static void SetScreenWidth(int width)
 	{
 		instance->screenWidth = width;
 	}
-	int GetScreenHeight()
+	static int GetScreenHeight()
 	{
 		return instance->screenHeight;
 	}
-	void SetScreenHeight(int height)
+	static void SetScreenHeight(int height)
 	{
 		instance->screenHeight = height;
 	}
-	sf::RenderWindow& GetRenderWindow()
+	static sf::RenderWindow& GetRenderWindow()
 	{
 		return instance->mainWindow;
 	}
-	sf::Clock GetClock()
+	static sf::Clock GetClock()
 	{
 		return instance->clock;
 	}
-	void SetClock(sf::Clock cl)
+	static void SetClock(sf::Clock cl)
 	{
 		instance->clock = cl;
 	}
-	GameManager& GetGameManager()
+	static GameManager& GetGameManager()
 	{
-		return gameManager;
+		return instance->gameManager;
 	}
 
-	sf::View GetView()
+	static sf::View GetView()
 	{
-		return view;
+		return instance->view;
 	}
-	void SetView(sf::View v)
+	static void SetView(sf::View v)
 	{
-		view = v;
+		instance->view = v;
 	}
 
 	// Start the game engine.

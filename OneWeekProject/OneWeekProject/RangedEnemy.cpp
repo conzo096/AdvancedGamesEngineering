@@ -24,7 +24,7 @@ void RangedEnemy::Update(float deltaTime)
 	timeActive += deltaTime;
 	cooldown-=deltaTime;
 	const PlayerShip* player = static_cast<PlayerShip*>
-		(Game::Instance()->GetGameManager().Get("Player"));
+		(Game::GetGameManager().Get("Player"));
 	if (player != NULL)
 	{
 		sf::Vector2f playerPosition = player->GetPosition();
@@ -45,7 +45,7 @@ void RangedEnemy::Update(float deltaTime)
 			bullet->SetPosition(GetSprite().getPosition().x, GetSprite().getPosition().y);
 			// Normalise then times by Speed *Create bullet property*
 			bullet->GetVelocity() = sf::Vector2f(towardsDirection);
-			Game::Instance()->GetGameManager().GetBullets().push_back(bullet);
+			Game::GetGameManager().GetBullets().push_back(bullet);
 			//cooldown = fireRate;
 			cooldown = (rand() % 3) + 1;
 		}

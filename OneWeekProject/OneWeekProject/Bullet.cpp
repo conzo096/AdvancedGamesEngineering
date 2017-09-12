@@ -26,19 +26,19 @@ void Bullet::Update(float deltaTime)
 
 	// Calculate if the move would result in ship being off screen.
 	if (pos.x  < GetSprite().getScale().x
-		|| pos.x >(Game::Instance()->GetScreenWidth() - GetSprite().getGlobalBounds().width))
+		|| pos.x >(Game::GetScreenWidth() - GetSprite().getGlobalBounds().width))
 	{
 		isActive = false;
 	}
 	if (pos.y  < GetSprite().getScale().y
-		|| pos.y >(Game::Instance()->GetScreenHeight() - GetSprite().getGlobalBounds().height))
+		|| pos.y >(Game::GetScreenHeight() - GetSprite().getGlobalBounds().height))
 	{
 		isActive = false;
 	}
 
 	//Check if it collides with the any object in game manger.
-	std::map<std::string, RenderableObject*>::iterator itr = Game::Instance()->GetGameManager().GetGameObjects().begin();
-	while (itr != Game::Instance()->GetGameManager().GetGameObjects().end())
+	std::map<std::string, RenderableObject*>::iterator itr = Game::GetGameManager().GetGameObjects().begin();
+	while (itr != Game::GetGameManager().GetGameObjects().end())
 	{
 		// If there is a collision delete both objects.
 		if (GetSprite().getGlobalBounds().intersects(itr->second->GetSprite().getGlobalBounds()))
