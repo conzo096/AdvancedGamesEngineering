@@ -5,6 +5,41 @@
 GraphicsOption::GraphicsOption()
 {
 	textFont.loadFromFile("Fonts/Cracked Code.ttf");
+	OptionItem option;
+	option.action = defaultResolution;
+	option.text.setFont(textFont);
+	option.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, Game::Instance()->Game::GetScreenHeight() / 6);
+	option.text.setString("1920 X 1080");
+	option.text.setFillColor(sf::Color::Blue);
+	OptionItem option1;
+	option1.action = resolutionOne;
+	option1.text.setFont(textFont);
+	option1.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, 2 * (Game::Instance()->Game::GetScreenHeight() / 6));
+	option1.text.setString("800 X 600");
+
+	OptionItem option2;
+	option2.action = enableFullScreen;
+	option2.text.setFont(textFont);
+	option2.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, 3 * (Game::Instance()->Game::GetScreenHeight() / 6));
+	option2.text.setString("ENABLE FULLSCREEN");
+
+	OptionItem option3;
+	option3.action = disableFullScreen;
+	option3.text.setFont(textFont);
+	option3.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, 4 * (Game::Instance()->Game::GetScreenHeight() / 6));
+	option3.text.setString("DISABLE FULLSCREEN");
+
+	OptionItem option4;
+	option4.action = exitMenu;
+	option4.text.setFont(textFont);
+	option4.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, 5 * (Game::Instance()->Game::GetScreenHeight() / 6));
+	option4.text.setString("EXIT");
+
+	options.push_back(option);
+	options.push_back(option1);
+	options.push_back(option2);
+	options.push_back(option3);
+	options.push_back(option4);
 }
 
 
@@ -30,10 +65,15 @@ GraphicsOption::MenuResult GraphicsOption::GetMenuResponse(sf::RenderWindow & re
 		{
 			res = HandleClick(menuEvent.mouseButton.x, menuEvent.mouseButton.y);
 		}
+		if (menuEvent.type == sf::Event::JoystickButtonPressed || menuEvent.type == sf::Event::JoystickMoved)
+		{
+			res = HandleController();
+		}
 		if (menuEvent.type == sf::Event::Closed)
 		{
 			return exitMenu;
 		}
+
 		// Handle option changes.
 		if (res == defaultResolution)
 		{
@@ -65,7 +105,7 @@ GraphicsOption::MenuResult GraphicsOption::GetMenuResponse(sf::RenderWindow & re
 
 GraphicsOption::MenuResult GraphicsOption::HandleClick(int x, int y)
 {
-	std::list<OptionItem>::iterator it;
+	std::vector<OptionItem>::iterator it;
 
 	for (it = options.begin(); it != options.end(); it++)
 	{
@@ -76,50 +116,57 @@ GraphicsOption::MenuResult GraphicsOption::HandleClick(int x, int y)
 			return (*it).action;
 		}
 	}
+
+	return nothing;
+}
+
+GraphicsOption::MenuResult GraphicsOption::HandleController()
+{
+	// Handle Controller options.
+	if (sf::Joystick::isConnected(0))
+	{
+		// Set all font colours to white.
+		for (int i = 0; i < options.size(); i++)
+			options.at(i).text.setFillColor(sf::Color::White);
+		MenuResult res = options.at(tracker).action;
+		// If it is, handle movement.
+		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+		if (y > 15)
+		{
+			tracker++;
+			if (tracker > options.size()-1)
+				tracker = 0;
+			res = options.at(tracker).action;
+			options.at(tracker).text.setFillColor(sf::Color::Blue);
+			DrawMenu(Game::Instance()->GetRenderWindow());
+			return nothing;
+		}
+		else if (y < -15)
+		{
+			tracker--;
+			if (tracker < 0)
+				tracker = options.size()-1;
+			res = options.at(tracker).action;
+			options.at(tracker).text.setFillColor(sf::Color::Blue);
+			DrawMenu(Game::Instance()->GetRenderWindow());
+			return nothing;
+		}
+	
+		if (sf::Joystick::isButtonPressed(0, sf::Joystick::Z))
+		{
+			return res;
+		}
+	}
 	return nothing;
 }
 
 void GraphicsOption::DrawMenu(sf::RenderWindow& renderWindow)
 {
 	renderWindow.clear();
-	OptionItem option;
-	option.action = defaultResolution;
-	option.text.setFont(textFont);
-	option.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, Game::Instance()->Game::GetScreenHeight() / 6);
-	option.text.setString("1920 X 1080");
 
-	OptionItem option1;
-	option1.action = resolutionOne;
-	option1.text.setFont(textFont);
-	option1.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, 2 * (Game::Instance()->Game::GetScreenHeight() / 6));
-	option1.text.setString("800 X 600");
-
-	OptionItem option2;
-	option2.action = enableFullScreen;
-	option2.text.setFont(textFont);
-	option2.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, 3*(Game::Instance()->Game::GetScreenHeight() / 6));
-	option2.text.setString("ENABLE FULLSCREEN");
-
-	OptionItem option3;
-	option3.action = disableFullScreen;
-	option3.text.setFont(textFont);
-	option3.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, 4*(Game::Instance()->Game::GetScreenHeight() / 6));
-	option3.text.setString("DISABLE FULLSCREEN");
-
-	OptionItem option4;
-	option4.action = exitMenu;
-	option4.text.setFont(textFont);
-	option4.text.setPosition(Game::Instance()->Game::GetScreenWidth() / 2, 5*(Game::Instance()->Game::GetScreenHeight() / 6));
-	option4.text.setString("EXIT");
-
-	options.push_back(option);
-	options.push_back(option1);
-	options.push_back(option2);
-	options.push_back(option3);
-	options.push_back(option4);
 	//Load menu image from file
 	sf::Texture image;
-	image.loadFromFile("images/GraphicsMenu.png");
+	image.loadFromFile("images/MainMenu.png");
 	sf::Sprite sprite(image);
 	sprite.setScale(sf::Vector2f(float(image.getSize().x) / Game::Instance()->GetScreenWidth(), float(image.getSize().y) / Game::Instance()->GetScreenHeight()));
 

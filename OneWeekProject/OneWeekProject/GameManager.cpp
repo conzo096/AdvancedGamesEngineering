@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "RangedEnemy.h"
+#include "Astroid.h"
 #include "Game.h"
 #include "PowerUp.h"
 #include <random>
@@ -58,13 +59,24 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 	enemiesAlive = enemiesToSpawn;
 	for (int i = 0; i < enemiesToSpawn; i++)
 	{
-		RangedEnemy* enemy = new RangedEnemy();
-
-		// Need to add random feature to this (Spawn just out of view).
-		enemy->SetPosition(i*(Game::Instance()->GetScreenWidth()/enemiesToSpawn), 50);
-		std::string enemyName = "Enemy"+ std::to_string(i);
-		enemy->SetName(enemyName);
-		AddObject(enemyName, enemy);
+		// Decide what enemy to spawn. 10% for astroid.
+		int bias = rand() % 10;
+		if (bias < 1)
+		{
+			Astroid* astroid = new Astroid();
+			astroid->SetPosition(i*(Game::Instance()->GetScreenWidth() / enemiesToSpawn), 50);
+			std::string enemyName = "Enemy" + std::to_string(i);
+			AddObject(enemyName, astroid);
+		}
+		else
+		{
+			RangedEnemy* enemy = new RangedEnemy();
+			// Need to add random feature to this (Spawn just out of view).
+			enemy->SetPosition(i*(Game::Instance()->GetScreenWidth() / enemiesToSpawn), 50);
+			std::string enemyName = "Enemy" + std::to_string(i);
+			enemy->SetName(enemyName);
+			AddObject(enemyName, enemy);
+		}
 	}
 	wave++;
 

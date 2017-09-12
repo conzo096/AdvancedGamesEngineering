@@ -1,6 +1,6 @@
 #pragma once
 #include "SFML\Graphics.hpp"
-#include <list>
+#include <vector>
 class GraphicsOption
 {
 public:
@@ -25,9 +25,12 @@ public:
 private:
 	MenuResult GetMenuResponse(sf::RenderWindow& window);
 	MenuResult HandleClick(int x, int y);
+	MenuResult HandleController();
 	void DrawMenu(sf::RenderWindow& renderWindow);
 
 	sf::Font textFont;
-	std::list<OptionItem> options;
+	std::vector<OptionItem> options;
+	int tracker = 0;
+
 };
 

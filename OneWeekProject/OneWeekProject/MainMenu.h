@@ -12,8 +12,7 @@ public:
 	struct MenuItem
 	{
 	public:
-		sf::Texture buttonTexture;
-		sf::Sprite buttonSprite;
+		sf::Text text;
 		MenuResult action;
 	};
 
@@ -22,9 +21,15 @@ public:
 	~MainMenu();
 
 	MenuResult Show(sf::RenderWindow& renderWindow);
+
 private:
 	MenuResult GetMenuResponse(sf::RenderWindow& window);
 	MenuResult HandleClick(int x, int y);
-	std::list<MenuItem> menuItems;
+	MenuResult HandleController();
+	void DrawMenu(sf::RenderWindow& renderWindow);
+
+	sf::Font textFont;
+	std::vector<MenuItem> options;
+	int tracker = 0;
 };
 

@@ -1,7 +1,6 @@
 #pragma once
-#include "RenderableObject.h"
-class Astroid :
-	public RenderableObject
+#include "Ship.h"
+class Astroid :public Ship
 {
 public:
 	Astroid();
