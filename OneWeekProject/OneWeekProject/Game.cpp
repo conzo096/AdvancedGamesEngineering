@@ -242,22 +242,14 @@ void Game::UpdateGame()
 		// Set the font to our Text object 
 		score.setFont(font);
 
-		if (currentEvent.key.code == sf::Keyboard::Escape)
+		if (currentEvent.key.code == sf::Keyboard::Escape || sf::Joystick::isButtonPressed(0, sf::Joystick::PovY))
 		{
 			SetGameState(Game::paused);
+			GetGameManager().StopSounds();
 			return;
 		}
-		if (currentEvent.type == sf::Event::Resized)
-		{
-		//	SetScreenWidth(currentEvent.size.width);
-		//	SetScreenHeight(currentEvent.size.height);
-			//GetRenderWindow().setView(sf::View(sf::FloatRect(0, 0, GetScreenWidth(), GetScreenHeight())));
-		}
-
-
+		
 		GetRenderWindow().clear(sf::Color(255, 255, 255));
-
-	
 
 		gameManager.UpdateAll(physicsClock.restart().asSeconds());
 

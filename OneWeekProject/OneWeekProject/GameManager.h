@@ -18,6 +18,7 @@ public:
 
 	void UpdateAll(float deltaTime);
 	void DrawAll(sf::RenderWindow& renderWindow);
+	void StopSounds();
 	int GameManager::GetObjectCount() const;
 	RenderableObject* GameManager::Get(std::string name) const;
 	void AddObject(std::string name,RenderableObject* gameObject);
@@ -52,7 +53,8 @@ private:
 	std::list<Bullet*> bullets;
 	// Audio Manager.
 	SFMLSoundProvider soundProvider;
-
+	
+	float spawnNewAstroid = 15;
 
 
 	struct GameObjectDeallocator

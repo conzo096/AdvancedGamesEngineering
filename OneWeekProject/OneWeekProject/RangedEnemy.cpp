@@ -47,7 +47,7 @@ void RangedEnemy::Update(float deltaTime)
 			float mag = std::sqrt(std::pow(towardsDirection.x, 2) + std::pow(towardsDirection.y, 2));
 			towardsDirection.x/ mag;
 			towardsDirection.y / mag;
-			bullet->GetVelocity() = sf::Vector2f(towardsDirection);
+			bullet->GetVelocity() = sf::Vector2f(towardsDirection*2.0f);
 			Game::GetGameManager().GetBullets().push_back(bullet);
 			//cooldown = fireRate;
 			cooldown = (rand() % 2) + 0.25;

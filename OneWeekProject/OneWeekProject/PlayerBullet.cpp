@@ -4,7 +4,7 @@
 #include "RangedEnemy.h"
 PlayerBullet::PlayerBullet()
 {
-	damage = 30005;
+	damage = 50;
 	LoadSprite("Images/GameObjects/Bullet.png");
 }
 
@@ -53,7 +53,6 @@ void PlayerBullet::Update(float deltaTime)
 				toBeDeleted = true;
 				if (enemy->GetHealth() <= 0)
 				{
-
 					Game::GetGameManager().PlayClip("Audio/kaboom.wav");
 					itr->second->toBeDeleted = true;
 					if (rand() % 10 == 0)

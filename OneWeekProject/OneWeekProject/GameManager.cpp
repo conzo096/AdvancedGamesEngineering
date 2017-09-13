@@ -131,7 +131,10 @@ void GameManager::PlayClip(std::string filePath)
 	soundProvider.PlaySound(filePath);
 }
 
-
+void GameManager::StopSounds()
+{
+	soundProvider.StopAllSounds();
+}
 int GameManager::GetObjectCount() const
 {
 	return gameObjects.size();
@@ -148,6 +151,32 @@ RenderableObject* GameManager::Get(std::string name) const
 
 void GameManager::UpdateAll(float deltaTime)
 {
+	spawnNewAstroid -= deltaTime;
+	if (spawnNewAstroid <= 0)
+	{
+		Astroid* astroid = new Astroid();
+		bool valid = false;
+		sf::Vector2f spawnLoc = sf::Vector2f(0, 0);
+		while (!valid)
+		{
+			float x = rand() % 3000 - 1500;
+			float y = rand() % 4000 - 2000;
+			spawnLoc = sf::Vector2f(x, y);
+			sf::FloatRect bounds(sf::Vector2f(0.f, 0.f), sf::Vector2f(Game::GetRenderWindow().getView().getSize().x, Game::GetRenderWindow().getView().getSize().y));
+
+			// Check if it is off screen
+			if (!bounds.contains(spawnLoc))
+			{
+				valid = true;
+			}
+		}
+		astroid->SetPosition(spawnLoc.x, spawnLoc.y);
+		std::string enemyName = "Astroid" + std::to_string(spawnLoc.x);
+		AddObject(enemyName, astroid);
+		// Spawn a new astroid between 1 and 19 seconds;
+		spawnNewAstroid = rand() % 19 + 1;
+	}
+
 	// Update bullets.
 	std::list<Bullet*>::iterator it = bullets.begin();
 	while (it != bullets.end())
@@ -181,21 +210,48 @@ void GameManager::UpdateAll(float deltaTime)
 		{
 			if (strstr(it->first.c_str(), "Enemy") || strstr(it->first.c_str(), "Astroid"))
 			{
-				Game::Instance()->GetGameManager().enemiesAlive--;
+				if (strstr(it->first.c_str(), "Enemy"))
+					Game::Instance()->GetGameManager().enemiesAlive--;
 				Game::Instance()->GetGameManager().score += it->second->scoreValue;
 			}
 			deletedList.push_back(it->first);
 		}
 		it++;
-	}
-	DeleteObjects(deletedList);
-	
+	}	
 	// Handle collisions with objects still active.
 	for (auto obj = GetGameObjects().begin(); obj != GetGameObjects().end(); ++obj)
 	{
 		for (auto obj1 = std::next(obj); obj1 != GetGameObjects().end(); ++obj1)
 		{
-			if (strstr(obj->first.c_str(), "Enemy") || strstr(obj1->first.c_str(), "Enemy"))
+			// If an astroid collides with an object.
+			if (strstr(obj->first.c_str(), "Astroid"))
+			{
+				if(obj->second->GetSprite().getGlobalBounds().intersects(obj1->second->GetSprite().getGlobalBounds()))
+				{
+					// Destroy the second object.
+					Ship* ship = static_cast<Ship*>(obj1->second);
+					if (ship != NULL)
+					{
+						ship->SetHealth(0);
+						ship->toBeDeleted = true;
+					}
+				}
+			}
+			if (strstr(obj1->first.c_str(), "Astroid"))
+			{
+				if (obj->second->GetSprite().getGlobalBounds().intersects(obj1->second->GetSprite().getGlobalBounds()))
+				{
+						Ship* ship = static_cast<Ship*>(obj->second);
+					if (ship != NULL)
+					{
+						ship->SetHealth(0);
+						ship->toBeDeleted = true;
+					}
+				}
+			}
+
+			// If two enemies collide.
+			else if (strstr(obj->first.c_str(), "Enemy") || strstr(obj1->first.c_str(), "Enemy"))
 			{
 				while (obj->second->GetSprite().getGlobalBounds().intersects(obj1->second->GetSprite().getGlobalBounds()))
 				{
@@ -206,8 +262,8 @@ void GameManager::UpdateAll(float deltaTime)
 				}
 			}
 		}
-
 	}
+	DeleteObjects(deletedList);
 }
 
 

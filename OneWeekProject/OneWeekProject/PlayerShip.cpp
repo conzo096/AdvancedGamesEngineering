@@ -12,7 +12,6 @@ PlayerShip::PlayerShip():power()
 	cooldown = 0.0f;
 	LoadSprite("Images/GameObjects/PlayerShip.png");
 	GetSprite().setOrigin(sf::Vector2f(float(GetSprite().getTexture()->getSize().x) / 2, float(GetSprite().getTexture()->getSize().y) / 2));
-
 }
 
 
@@ -131,10 +130,6 @@ void PlayerShip::Update(float deltaTime)
 				cooldown = fireRate;
 			}
 		}
-	
-		// Check if paused.
-		if (sf::Joystick::isButtonPressed(0, sf::Joystick::PovY))
-			Game::SetGameState(Game::paused);
 	}
 
 

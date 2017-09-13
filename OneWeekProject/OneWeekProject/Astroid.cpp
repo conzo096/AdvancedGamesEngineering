@@ -4,7 +4,7 @@
 
 Astroid::Astroid()
 {
-	scoreValue = 100;
+	scoreValue = 5;
 	fireRate = 0;
 	cooldown = 0.0f;
 	health = 200;
@@ -34,7 +34,8 @@ void Astroid::Update(float deltaTime)
 	timeActive += deltaTime;
 
 	GetSprite().move(velocity*deltaTime);
-
+	if (health <= 0)
+		toBeDeleted = true;
 	if(timeActive > 4)
 		toBeDeleted = true;
 }

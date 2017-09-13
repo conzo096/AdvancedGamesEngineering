@@ -25,6 +25,7 @@ void SFMLSoundProvider::PlaySound(std::string filename)
 		try
 		{
 			_currentSounds[availChannel] = _soundFileCache.GetSound(filename);
+			_currentSounds[availChannel].setVolume(10);
 			_currentSounds[availChannel].play();
 		}
 		catch(SoundNotFoundExeception& snfe)
@@ -70,6 +71,7 @@ void SFMLSoundProvider::PlaySong(std::string filename, bool looping)
 	}
 	_currentSongName = filename;
 	currentSong->setLoop(looping);
+	currentSong->setVolume(20);
 	currentSong->play();
 }
 
