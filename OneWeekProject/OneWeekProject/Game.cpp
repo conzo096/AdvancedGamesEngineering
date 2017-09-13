@@ -6,7 +6,7 @@
 #include "SFMLSoundProvider.h"
 #include "ServiceLocator.h"
 #include "GraphicsMenu.h"
-#include <iostream>
+#include "PauseScreen.h"
 Game *Game::instance = 0;
 
 
@@ -131,7 +131,29 @@ void Game::ShowMainMenu()
 
 void Game::ShowPauseScreen()
 {
-	ShowMainMenu();
+	PauseMenu options;
+	PauseMenu::MenuResult result = options.Show(mainWindow);
+	switch (result)
+	{
+		case::PauseMenu::nothing:
+		{
+			SetGameState(Game::paused);
+			break;
+		}
+		case PauseMenu::keepPlaying:
+		{
+			SetGameState(Game::playing);
+			Game::GetClock().restart();
+			break;
+		}
+		case PauseMenu::showMainMenu:
+		{
+			SetGameState(Game::showingMainMenu);
+			ResetGame();
+			break;
+		}
+
+	}
 }
 
 
@@ -180,6 +202,8 @@ void Game::UpdateGame()
 		else
 		{
 			myText.setString("WHERE DID THE SHIP GO?");
+			Game::AddScore(Game::GetGameManager().score);
+			ResetGame();
 		}
 		// assign a size 
 		myText.setCharacterSize(20);
@@ -221,7 +245,6 @@ void Game::UpdateGame()
 		if (currentEvent.key.code == sf::Keyboard::Escape)
 		{
 			SetGameState(Game::paused);
-			ResetGame();
 			return;
 		}
 		if (currentEvent.type == sf::Event::Resized)

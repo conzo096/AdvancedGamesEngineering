@@ -65,7 +65,7 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 		{
 			Astroid* astroid = new Astroid();
 			astroid->SetPosition(i*(Game::Instance()->GetScreenWidth() / enemiesToSpawn), 50);
-			std::string enemyName = "Enemy" + std::to_string(i);
+			std::string enemyName = "Astroid" + std::to_string(i);
 			AddObject(enemyName, astroid);
 		}
 		else

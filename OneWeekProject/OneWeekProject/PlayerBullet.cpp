@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "PowerUp.h"
 #include "RangedEnemy.h"
-
 PlayerBullet::PlayerBullet()
 {
 	damage = 30005;

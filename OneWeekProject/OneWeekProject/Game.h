@@ -69,6 +69,16 @@ public:
 		instance->view = v;
 	}
 
+	static void AddScore(float score)
+	{
+		instance->highScores.push_back(score);
+	}
+
+	static std::vector<float> GetScores()
+	{
+		return instance->highScores;
+	}
+
 	// Start the game engine.
 	void Start();
 	//Reset the game.
@@ -95,6 +105,10 @@ private:
 	sf::Clock clock;
 	// Instance of the game manager.
 	GameManager gameManager;
+	// Keep track of scores for the session.
+	std::vector<float> highScores;
+
+
 	// Loops, checking what game state it is in and acts
 	// accordingly.
 	void GameLoop(); 

@@ -135,18 +135,25 @@ void PlayerShip::Update(float deltaTime)
 
 
 	sf::Vector2f pos = GetPosition();
-	sf::FloatRect bounds(sf::Vector2f(0.f, 0.f), sf::Vector2f(Game::GetScreenWidth(),Game::GetScreenHeight()));
+	sf::FloatRect bounds(sf::Vector2f(0.f, 0.f), sf::Vector2f(Game::GetRenderWindow().getView().getSize().x, Game::GetRenderWindow().getView().getSize().y));
 
 	//// Calculate if the move would result in ship being off screen.
-	if (pos.x < bounds.left ||
-		pos.x > bounds.width - GetSprite().getGlobalBounds().width)
+	if (pos.x < bounds.left)
 	{
-		movement.x = -movement.x*2;
+		movement.x +=650;
 	}
-	if (pos.y < bounds.top||
-		pos.y > bounds.height - GetSprite().getGlobalBounds().height)
+	if(pos.x > bounds.width - GetSprite().getGlobalBounds().width)
 	{
-		movement.y = -movement.y*2;
+		movement.x -= 650;
+	}
+
+	if (pos.y < bounds.top)
+	{
+		movement.y += 650;
+	}
+	if(pos.y > bounds.height - GetSprite().getGlobalBounds().height)
+	{
+		movement.y -=650;
 	}
 
 	// Add limit to bullets created.

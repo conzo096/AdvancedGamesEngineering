@@ -96,6 +96,9 @@
     <ClInclude Include="GraphicsMenu.h">
       <Filter>Header Files\GameScreens</Filter>
     </ClInclude>
+    <ClInclude Include="PauseScreen.h">
+      <Filter>Header Files\GameScreens</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -150,6 +153,9 @@
       <Filter>Source Files\Audio</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsMenu.cpp">
+      <Filter>Source Files\GameScreens</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseScreen.cpp">
       <Filter>Source Files\GameScreens</Filter>
     </ClCompile>
   </ItemGroup>
