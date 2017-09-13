@@ -202,7 +202,8 @@ void Game::UpdateGame()
 		else
 		{
 			myText.setString("WHERE DID THE SHIP GO?");
-			Game::AddScore(Game::GetGameManager().score);
+			AddScore(GetGameManager().score);
+			std::sort(highScores.begin(), highScores.end(), GameManager::GreaterScore());
 			ResetGame();
 		}
 		// assign a size 
@@ -230,7 +231,6 @@ void Game::UpdateGame()
 		wave.setFont(font);	
 
 		sf::Text score;
-
 		score.setString(std::to_string(Game::GetGameManager().score));
 		score.setCharacterSize(20);
 

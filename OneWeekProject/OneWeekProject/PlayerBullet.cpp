@@ -59,7 +59,6 @@ void PlayerBullet::Update(float deltaTime)
 					if (rand() % 10 == 0)
 					{
 						PowerUp* power = new PowerUp();
-						power->LoadSprite("Images/GameObjects/DualCannons.png");
 						power->SetPosition(GetPosition().x, GetPosition().y);
 						PowerUp::PowerUpType type = static_cast<PowerUp::PowerUpType>(rand() % 3);
 						power->SetPowerUpType(type);

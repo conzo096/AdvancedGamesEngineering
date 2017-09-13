@@ -118,7 +118,7 @@ PauseMenu::MenuResult PauseMenu::HandleController()
 			return nothing;
 		}
 
-		if (sf::Joystick::isButtonPressed(0, sf::Joystick::Z))
+		if (sf::Joystick::isButtonPressed(0, sf::Joystick::X))
 		{
 			return res;
 		}

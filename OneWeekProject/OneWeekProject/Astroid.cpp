@@ -8,8 +8,8 @@ Astroid::Astroid()
 	fireRate = 0;
 	cooldown = 0.0f;
 	health = 200;
-	LoadSprite("Images/GameObjects/DualCannons.png");
-	PlayerShip* player = static_cast<PlayerShip*>
+	LoadSprite("Images/GameObjects/Astroid.png");
+	const PlayerShip* player = static_cast<PlayerShip*>
 		(Game::GetGameManager().Get("Player"));
 	if (player != NULL)
 	{
@@ -19,7 +19,7 @@ Astroid::Astroid()
 		//Calculate new angle to face player.
 		float angle = std::atan2(towardsDirection.x, -towardsDirection.y) * (180 / 3.14);
 		GetSprite().setRotation(angle);
-		velocity = towardsDirection;
+		velocity = towardsDirection*0.8f ;
 	}
 
 }
@@ -35,6 +35,6 @@ void Astroid::Update(float deltaTime)
 
 	GetSprite().move(velocity*deltaTime);
 
-	if(timeActive > 15)
+	if(timeActive > 4)
 		toBeDeleted = true;
 }

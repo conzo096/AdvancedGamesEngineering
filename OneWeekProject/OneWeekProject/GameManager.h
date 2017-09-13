@@ -7,6 +7,12 @@
 class GameManager
 {
 public:
+
+	struct GreaterScore
+	{
+		template<class T>
+		bool operator()(T const &a, T const &b) const { return a > b; }
+	}; 
 	GameManager();
 	~GameManager();
 
@@ -56,5 +62,7 @@ private:
 			delete p.second;
 		}
 	};
+
+	
 };
 

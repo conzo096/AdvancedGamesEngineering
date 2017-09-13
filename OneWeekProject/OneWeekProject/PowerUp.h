@@ -36,12 +36,15 @@ public:
 		duration -= dur;
 	}
 
+	void Draw(sf::RenderWindow &window);
 
+	sf::IntRect spriteRect;
 
 private:
 	// Type of power up.
 	PowerUpType powerUp;
 	// How long it is to last for.
 	float duration;
+	sf::Clock clock;
 };
 

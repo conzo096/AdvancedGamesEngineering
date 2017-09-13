@@ -85,7 +85,7 @@ void PlayerShip::Update(float deltaTime)
 		if (y >15 || y<-15)
 			movement.y = y*5;
 
-		if (sf::Joystick::isButtonPressed(0, sf::Joystick::Z))
+		if (sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Z) < -15)
 		{
 			if (cooldown <= 0)
 			{
@@ -131,6 +131,10 @@ void PlayerShip::Update(float deltaTime)
 				cooldown = fireRate;
 			}
 		}
+	
+		// Check if paused.
+		if (sf::Joystick::isButtonPressed(0, sf::Joystick::PovY))
+			Game::SetGameState(Game::paused);
 	}
 
 

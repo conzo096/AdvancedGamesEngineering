@@ -4,6 +4,7 @@ class MainMenu
 {
 public:
 
+
 	enum MenuResult
 	{
 		exitApplication, playGame, showGraphicsOption, nothing
@@ -21,7 +22,6 @@ public:
 	~MainMenu();
 
 	MenuResult Show(sf::RenderWindow& renderWindow);
-
 private:
 	MenuResult GetMenuResponse(sf::RenderWindow& window);
 	MenuResult HandleClick(int x, int y);
@@ -31,5 +31,6 @@ private:
 	sf::Font textFont;
 	std::vector<MenuItem> options;
 	int tracker = 0;
+	sf::Clock clock;
 };
 

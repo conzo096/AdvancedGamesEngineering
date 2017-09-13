@@ -71,6 +71,7 @@ MainMenu::MenuResult MainMenu::GetMenuResponse(sf::RenderWindow & renderWindow)
 		if (menuEvent.type == sf::Event::JoystickButtonPressed || menuEvent.type == sf::Event::JoystickMoved)
 		{
 			res = HandleController();
+			DrawMenu(Game::GetRenderWindow());
 		}
 		if (res != nothing)
 			return res;
@@ -87,7 +88,6 @@ MainMenu::MenuResult MainMenu::HandleClick(int x, int y)
 		sf::Text text = (*it).text;
 		if (text.getGlobalBounds().contains(Game::GetRenderWindow().mapPixelToCoords(sf::Vector2i(x,y))))
 		{
-
 			return (*it).action;
 		}
 	}
@@ -99,33 +99,44 @@ MainMenu::MenuResult MainMenu::HandleController()
 	// Handle Controller options.
 	if (sf::Joystick::isConnected(0))
 	{
-		// Set all font colours to white.
-		for (int i = 0; i < options.size(); i++)
-			options.at(i).text.setFillColor(sf::Color::White);
+	
 		MenuResult res = options.at(tracker).action;
 		// If it is, handle movement.
 		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-		if (y > 15)
+		if (clock.getElapsedTime().asSeconds() > 0.25f)
 		{
-			tracker++;
-			if (tracker > options.size() - 1)
-				tracker = 0;
-			res = options.at(tracker).action;
-			options.at(tracker).text.setFillColor(sf::Color::Blue);
-			DrawMenu(Game::GetRenderWindow());
-			return nothing;
-		}
-		else if (y < -15)
-		{
-			tracker--;
-			if (tracker < 0)
-				tracker = options.size() - 1;
-			res = options.at(tracker).action;
-			options.at(tracker).text.setFillColor(sf::Color::Blue);
-			DrawMenu(Game::GetRenderWindow());
-			return nothing;
-		}
+			// Set all font colours to white.
+			clock.restart();
+			if (y > 15)
+			{
+				tracker++;
+				if (tracker > options.size()-1)
+					tracker = 0;
+				res = options.at(tracker).action;
+				options.at(tracker).text.setFillColor(sf::Color::Blue);
+				DrawMenu(Game::GetRenderWindow());
+				return nothing;
+			}
+			else if (y < -15)
+			{
+				tracker--;
+				if (tracker < 0)
+					tracker = options.size() - 1;
+				res = options.at(tracker).action;
+				options.at(tracker).text.setFillColor(sf::Color::Blue);
+				DrawMenu(Game::GetRenderWindow());
+				return nothing;
+			}
+			for (int i = 0; i < options.size(); i++)
+			{
+				if (tracker == i)
+					options.at(i).text.setFillColor(sf::Color::Blue);
+				else
+					options.at(i).text.setFillColor(sf::Color::White);
+			}
 
+
+		}
 		if (sf::Joystick::isButtonPressed(0, sf::Joystick::Z))
 		{
 			return res;
@@ -151,10 +162,7 @@ void MainMenu::DrawMenu(sf::RenderWindow & renderWindow)
 		renderWindow.draw(o.text);
 	}
 	renderWindow.display();
-	for (MenuItem o : options)
-	{
-			o.text.setFillColor(sf::Color::White);
-	}
+
 }
 
 

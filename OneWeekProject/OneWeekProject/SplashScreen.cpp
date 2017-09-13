@@ -33,15 +33,10 @@ void SplashScreen::Show(sf::RenderWindow & renderWindow)
 
 		renderWindow.pollEvent(event);
 		if (event.type == sf::Event::EventType::KeyPressed
-			||timer.getElapsedTime().asSeconds() >= timeRemaining)
+			||timer.getElapsedTime().asSeconds() >= timeRemaining || event.type == sf::Event::JoystickButtonPressed)
 		{
 			return;
 		}
-		if (event.type == sf::Event::Resized)
-		{
-		//	Game::Instance()->SetScreenWidth(event.size.width);
-		//	Game::Instance()->SetScreenHeight(event.size.height);
-		
-		}
+
 	}
 }
