@@ -5,7 +5,7 @@
 PlayerBullet::PlayerBullet()
 {
 	damage = 50;
-	LoadSprite("Images/GameObjects/Bullet.png");
+	LoadSprite("res/Images/GameObjects/Bullet.png");
 }
 
 
@@ -53,7 +53,7 @@ void PlayerBullet::Update(float deltaTime)
 				toBeDeleted = true;
 				if (enemy->GetHealth() <= 0)
 				{
-					Game::GetGameManager().PlayClip("Audio/kaboom.wav");
+					Game::GetGameManager().PlayClip("res/Audio/kaboom.wav");
 					itr->second->toBeDeleted = true;
 					if (rand() % 10 == 0)
 					{

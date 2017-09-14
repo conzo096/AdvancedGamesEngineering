@@ -58,9 +58,9 @@ section "install"
 	file "x64\Release\OneWeekProject.exe"
 	# Add any other files for the install directory (license files, app data, etc) here
 	file /r "x64\Release\bin\*.*"
-	file /r "OneWeekProject\Audio"
-	file /r "OneWeekProject\Fonts"
-	file /r "OneWeekProject\Images"
+	file /r "OneWeekProject\res\Audio"
+	file /r "OneWeekProject\res\Fonts"
+	file /r "OneWeekProject\res\Images"
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
 	writeUninstaller "$INSTDIR\uninstall.exe"
  
@@ -108,9 +108,9 @@ section "uninstall"
  
 	# Remove files
 	delete $INSTDIR\OneWeekProject.exe
-	delete $INSTDIR\Audio
-	delete $INSTDIR\OneWeekProject\Fonts
-	delete $INSTDIR\OneWeekProject\Images
+	delete $INSTDIR\OneWeekProject\res\Audio
+	delete $INSTDIR\OneWeekProject\res\Fonts
+	delete $INSTDIR\OneWeekProject\res\Images
 	
  	# Always delete uninstaller as the last action
 	delete $INSTDIR\uninstall.exe

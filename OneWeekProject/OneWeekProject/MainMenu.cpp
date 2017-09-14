@@ -4,7 +4,7 @@
 #include "Game.h"
 MainMenu::MainMenu()
 {
-	textFont.loadFromFile("Fonts/Cracked Code.ttf");
+	textFont.loadFromFile("res/Fonts/Cracked Code.ttf");
 	//Play menu item coordinates
 	MenuItem playButton;
 	playButton.action = playGame;
@@ -51,7 +51,6 @@ MainMenu::MenuResult MainMenu::GetMenuResponse(sf::RenderWindow & renderWindow)
 	sf::Event menuEvent;
 	while (true)
 	{
-		DrawMenu(renderWindow);
 		renderWindow.pollEvent(menuEvent);
 		if (menuEvent.type == sf::Event::MouseMoved)
 		{
@@ -60,9 +59,9 @@ MainMenu::MenuResult MainMenu::GetMenuResponse(sf::RenderWindow & renderWindow)
 				if (o.text.getGlobalBounds().contains(Game::GetRenderWindow().mapPixelToCoords(sf::Vector2i(menuEvent.mouseButton.x, menuEvent.mouseButton.y))))
 					o.text.setFillColor(sf::Color::Blue);
 			}
-			DrawMenu(renderWindow);
 		}
-	
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || menuEvent.type == sf::Event::Closed)
+			return exitApplication;
 		MenuResult res = nothing;
 		if (menuEvent.type == sf::Event::MouseButtonPressed)
 		{
@@ -71,13 +70,11 @@ MainMenu::MenuResult MainMenu::GetMenuResponse(sf::RenderWindow & renderWindow)
 		if (menuEvent.type == sf::Event::JoystickButtonPressed || menuEvent.type == sf::Event::JoystickMoved)
 		{
 			res = HandleController();
-			DrawMenu(Game::GetRenderWindow());
 		}
 		if (res != nothing)
 			return res;
+		DrawMenu(renderWindow);
 	}
-
-
 }
 
 MainMenu::MenuResult MainMenu::HandleClick(int x, int y)
@@ -99,16 +96,16 @@ MainMenu::MenuResult MainMenu::HandleController()
 	// Handle Controller options.
 	if (sf::Joystick::isConnected(0))
 	{
-	
 		MenuResult res = options.at(tracker).action;
 		// If it is, handle movement.
 		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-		if (clock.getElapsedTime().asSeconds() > 0.25f)
+		if (clock.getElapsedTime().asSeconds() > 0.08f)
 		{
 			// Set all font colours to white.
 			clock.restart();
-			if (y > 15)
+			if (y > 75)
 			{
+				options.at(tracker).text.setFillColor(sf::Color::White);
 				tracker++;
 				if (tracker > options.size()-1)
 					tracker = 0;
@@ -117,8 +114,9 @@ MainMenu::MenuResult MainMenu::HandleController()
 				DrawMenu(Game::GetRenderWindow());
 				return nothing;
 			}
-			else if (y < -15)
+			else if (y < -75)
 			{
+				options.at(tracker).text.setFillColor(sf::Color::White);
 				tracker--;
 				if (tracker < 0)
 					tracker = options.size() - 1;
@@ -127,17 +125,8 @@ MainMenu::MenuResult MainMenu::HandleController()
 				DrawMenu(Game::GetRenderWindow());
 				return nothing;
 			}
-			for (int i = 0; i < options.size(); i++)
-			{
-				if (tracker == i)
-					options.at(i).text.setFillColor(sf::Color::Blue);
-				else
-					options.at(i).text.setFillColor(sf::Color::White);
-			}
-
-
 		}
-		if (sf::Joystick::isButtonPressed(0, sf::Joystick::Z))
+		if (sf::Joystick::isButtonPressed(0, sf::Joystick::X))
 		{
 			return res;
 		}
@@ -151,11 +140,9 @@ void MainMenu::DrawMenu(sf::RenderWindow & renderWindow)
 
 	//Load menu image from file
 	sf::Texture image;
-	image.loadFromFile("images/MainMenu.png");
+	image.loadFromFile("res/Images/MainMenu.png");
 	sf::Sprite sprite(image);
 	sprite.setScale(sf::Vector2f(float(image.getSize().x) / Game::GetScreenWidth(), float(image.getSize().y) / Game::GetScreenHeight()));
-
-
 	renderWindow.draw(sprite);
 	for (MenuItem o : options)
 	{

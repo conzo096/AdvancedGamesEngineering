@@ -8,7 +8,7 @@ Astroid::Astroid()
 	fireRate = 0;
 	cooldown = 0.0f;
 	health = 200;
-	LoadSprite("Images/GameObjects/Astroid.png");
+	LoadSprite("res/Images/GameObjects/Astroid.png");
 	const PlayerShip* player = static_cast<PlayerShip*>
 		(Game::GetGameManager().Get("Player"));
 	if (player != NULL)

@@ -10,7 +10,7 @@ PlayerShip::PlayerShip():power()
 	isActive = true;
 	fireRate = 0.25f;
 	cooldown = 0.0f;
-	LoadSprite("Images/GameObjects/PlayerShip.png");
+	LoadSprite("res/Images/GameObjects/PlayerShip.png");
 	GetSprite().setOrigin(sf::Vector2f(float(GetSprite().getTexture()->getSize().x) / 2, float(GetSprite().getTexture()->getSize().y) / 2));
 }
 

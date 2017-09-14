@@ -31,6 +31,6 @@ private:
 	sf::Font textFont;
 	std::vector<OptionItem> options;
 	int tracker = 0;
-
+	sf::Clock clock;
 };
 

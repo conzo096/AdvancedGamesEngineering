@@ -31,5 +31,6 @@ private:
 	sf::Font textFont;
 	std::vector<MenuItem> options;
 	int tracker = 0;
+	sf::Clock clock;
 };
 

@@ -9,7 +9,7 @@ RangedEnemy::RangedEnemy()
 	fireRate = 1.5f;
 	cooldown = 0.0f;
 	health = 75;
-	LoadSprite("Images/GameObjects/EnemyShip1.png");
+	LoadSprite("res/Images/GameObjects/EnemyShip1.png");
 	GetSprite().setOrigin(sf::Vector2f(float(GetSprite().getTexture()->getSize().x) / 2, float(GetSprite().getTexture()->getSize().y) / 2));
 	cooldown = (rand() % 3) + 1;
 }

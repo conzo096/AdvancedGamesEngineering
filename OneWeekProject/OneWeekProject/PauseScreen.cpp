@@ -5,7 +5,7 @@
 #include <string>
 PauseMenu::PauseMenu()
 {
-	textFont.loadFromFile("Fonts/Cracked Code.ttf");
+	textFont.loadFromFile("res/Fonts/Cracked Code.ttf");
 	//Play menu item coordinates
 	MenuItem playButton;
 	playButton.action = keepPlaying;
@@ -43,7 +43,6 @@ PauseMenu::MenuResult PauseMenu::GetMenuResponse(sf::RenderWindow & renderWindow
 	sf::Event menuEvent;
 	while (true)
 	{
-		DrawMenu(renderWindow);
 		renderWindow.pollEvent(menuEvent);
 		if (menuEvent.type == sf::Event::MouseMoved)
 		{
@@ -52,7 +51,6 @@ PauseMenu::MenuResult PauseMenu::GetMenuResponse(sf::RenderWindow & renderWindow
 				if (o.text.getGlobalBounds().contains(Game::GetRenderWindow().mapPixelToCoords(sf::Vector2i(menuEvent.mouseButton.x, menuEvent.mouseButton.y))))
 					o.text.setFillColor(sf::Color::Blue);
 			}
-			DrawMenu(renderWindow);
 		}
 
 		MenuResult res = nothing;
@@ -66,6 +64,7 @@ PauseMenu::MenuResult PauseMenu::GetMenuResponse(sf::RenderWindow & renderWindow
 		}
 		if (res != nothing)
 			return res;
+		DrawMenu(renderWindow);
 	}
 
 
@@ -91,36 +90,40 @@ PauseMenu::MenuResult PauseMenu::HandleController()
 	// Handle Controller options.
 	if (sf::Joystick::isConnected(0))
 	{
-		// Set all font colours to white.
-		for (int i = 0; i < options.size(); i++)
-			options.at(i).text.setFillColor(sf::Color::White);
-		MenuResult res = options.at(tracker).action;
-		// If it is, handle movement.
-		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-		if (y > 15)
+		if (clock.getElapsedTime().asSeconds() > 0.08f)
 		{
-			tracker++;
-			if (tracker > options.size() - 1)
-				tracker = 0;
-			res = options.at(tracker).action;
-			options.at(tracker).text.setFillColor(sf::Color::Blue);
-			DrawMenu(Game::GetRenderWindow());
-			return nothing;
-		}
-		else if (y < -15)
-		{
-			tracker--;
-			if (tracker < 0)
-				tracker = options.size() - 1;
-			res = options.at(tracker).action;
-			options.at(tracker).text.setFillColor(sf::Color::Blue);
-			DrawMenu(Game::GetRenderWindow());
-			return nothing;
-		}
+			clock.restart();
 
-		if (sf::Joystick::isButtonPressed(0, sf::Joystick::X))
-		{
-			return res;
+			MenuResult res = options.at(tracker).action;
+			// If it is, handle movement.
+			float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+			if (y > 75)
+			{
+				options.at(tracker).text.setFillColor(sf::Color::White);
+
+				tracker++;
+				if (tracker > options.size() - 1)
+					tracker = 0;
+				res = options.at(tracker).action;
+				options.at(tracker).text.setFillColor(sf::Color::Blue);
+				DrawMenu(Game::GetRenderWindow());
+				return nothing;
+			}
+			else if (y < -75)
+			{
+				options.at(tracker).text.setFillColor(sf::Color::White);
+				tracker--;
+				if (tracker < 0)
+					tracker = options.size() - 1;
+				res = options.at(tracker).action;
+				options.at(tracker).text.setFillColor(sf::Color::Blue);
+				DrawMenu(Game::GetRenderWindow());
+				return nothing;
+			}
+			if (sf::Joystick::isButtonPressed(0, sf::Joystick::X))
+			{
+				return res;
+			}
 		}
 	}
 	return nothing;
@@ -131,13 +134,13 @@ void PauseMenu::DrawMenu(sf::RenderWindow & renderWindow)
 	renderWindow.clear();
 
 	//Load menu image from file
-	sf::Texture image;
+	/*sf::Texture image;
 	image.loadFromFile("images/PauseMenu.png");
 	sf::Sprite sprite(image);
 	sprite.setScale(sf::Vector2f(float(image.getSize().x) / Game::GetScreenWidth(), float(image.getSize().y) / Game::GetScreenHeight()));
+*/
 
-
-	renderWindow.draw(sprite);
+//	renderWindow.draw(sprite);
 	for (MenuItem o : options)
 	{
 		renderWindow.draw(o.text);

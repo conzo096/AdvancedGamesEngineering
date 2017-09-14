@@ -7,6 +7,7 @@
 #include "ServiceLocator.h"
 #include "GraphicsMenu.h"
 #include "PauseScreen.h"
+#include "GameOverScreen.h"
 Game *Game::instance = 0;
 
 
@@ -89,6 +90,11 @@ void Game::GameLoop()
 			case playing:
 			{
 				UpdateGame();
+				break;
+			}
+			case gameOver:
+			{
+				ShowGameOver();
 				break;
 			}
 		}
@@ -176,6 +182,32 @@ void Game::ShowGraphicsMenu()
 	}
 }
 
+void Game::ShowGameOver()
+{
+	GameOverScreen options;
+	GameOverScreen::MenuResult result = options.Show(mainWindow);
+	switch (result)
+	{
+		case::GameOverScreen::nothing:
+		{
+			SetGameState(Game::gameOver);
+			break;
+		}
+		case::GameOverScreen::showMainMenu:
+		{
+			SetGameState(Game::showingMainMenu);
+			break;
+		}
+		case::GameOverScreen::exit:
+		{
+			SetGameState(Game::exiting);
+			break;
+		}
+	}
+}
+
+
+
 // This handles the actual game logic. What actually happens when the game
 // is running. 
 void Game::UpdateGame()
@@ -191,7 +223,7 @@ void Game::UpdateGame()
 		}
 		mainWindow.pollEvent(currentEvent);
 		sf::Font font;
-		font.loadFromFile("Fonts/Cracked Code.ttf");
+		font.loadFromFile("res/Fonts/Cracked Code.ttf");
 		sf::Text myText;
 		// Assign the actual message 
 		PlayerShip* pl = (PlayerShip*)gameManager.Get("Player");
@@ -204,7 +236,8 @@ void Game::UpdateGame()
 			myText.setString("WHERE DID THE SHIP GO?");
 			AddScore(GetGameManager().score);
 			std::sort(highScores.begin(), highScores.end(), GameManager::GreaterScore());
-			ResetGame();
+			Game::SetGameState(Game::gameOver);
+			//ResetGame();
 		}
 		// assign a size 
 		myText.setCharacterSize(20);

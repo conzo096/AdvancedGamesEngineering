@@ -4,7 +4,7 @@
 
 PowerUp::PowerUp()
 {
-	LoadSprite("Images/GameObjects/PowerUp.png");
+	LoadSprite("res/Images/GameObjects/PowerUp.png");
 	spriteRect = sf::IntRect(0, 0, 32, 32);
 	GetSprite().setTextureRect(spriteRect);
 

@@ -16,7 +16,7 @@ void SplashScreen::Show(sf::RenderWindow & renderWindow)
 	float timeRemaining =3.0;
 	sf::Clock timer;
 	sf::Texture image;
-	if (image.loadFromFile("Images/SplashScreen.png") != true)
+	if (image.loadFromFile("res/Images/SplashScreen.png") != true)
 	{
 		return;
 	}

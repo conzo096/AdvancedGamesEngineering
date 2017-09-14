@@ -4,7 +4,7 @@
 
 GraphicsOption::GraphicsOption()
 {
-	textFont.loadFromFile("Fonts/Cracked Code.ttf");
+	textFont.loadFromFile("res/Fonts/Cracked Code.ttf");
 	OptionItem option;
 	option.action = defaultResolution;
 	option.text.setFont(textFont);
@@ -110,6 +110,7 @@ GraphicsOption::MenuResult GraphicsOption::GetMenuResponse(sf::RenderWindow & re
 		}
 		if (res != nothing)
 			return res;
+		DrawMenu(renderWindow);
 	}
 }
 
@@ -134,36 +135,37 @@ GraphicsOption::MenuResult GraphicsOption::HandleController()
 	// Handle Controller options.
 	if (sf::Joystick::isConnected(0))
 	{
-		// Set all font colours to white.
-		for (int i = 0; i < options.size(); i++)
-			options.at(i).text.setFillColor(sf::Color::White);
-		MenuResult res = options.at(tracker).action;
-		// If it is, handle movement.
-		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-		if (y > 15)
+		if (clock.getElapsedTime().asSeconds() > 0.08f)
 		{
-			tracker++;
-			if (tracker > options.size()-1)
-				tracker = 0;
-			res = options.at(tracker).action;
-			options.at(tracker).text.setFillColor(sf::Color::Blue);
-			DrawMenu(Game::GetRenderWindow());
-			return nothing;
-		}
-		else if (y < -15)
-		{
-			tracker--;
-			if (tracker < 0)
-				tracker = options.size()-1;
-			res = options.at(tracker).action;
-			options.at(tracker).text.setFillColor(sf::Color::Blue);
-			DrawMenu(Game::GetRenderWindow());
-			return nothing;
-		}
-	
-		if (sf::Joystick::isButtonPressed(0, sf::Joystick::X))
-		{
-			return res;
+			clock.restart();
+			MenuResult res = options.at(tracker).action;
+			// If it is, handle movement.
+			float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+			if (y > 75)
+			{
+				options.at(tracker).text.setFillColor(sf::Color::White);
+				tracker++;
+				if (tracker > options.size() - 1)
+					tracker = 0;
+				res = options.at(tracker).action;
+				options.at(tracker).text.setFillColor(sf::Color::Blue);
+				return nothing;
+			}
+			else if (y < -75)
+			{
+				options.at(tracker).text.setFillColor(sf::Color::White);
+				tracker--;
+				if (tracker < 0)
+					tracker = options.size() - 1;
+				res = options.at(tracker).action;
+				options.at(tracker).text.setFillColor(sf::Color::Blue);
+				return nothing;
+			}
+
+			if (sf::Joystick::isButtonPressed(0, sf::Joystick::X))
+			{
+				return res;
+			}
 		}
 	}
 	return nothing;

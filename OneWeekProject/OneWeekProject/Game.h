@@ -8,7 +8,7 @@ public:
 	enum GameState
 	{
 		uninitialized, showingSplashScreen,paused,
-		showingMainMenu, playing, exiting, showingGraphicsMenu
+		showingMainMenu, playing, exiting, showingGraphicsMenu, gameOver
 	};
 
 	~Game();
@@ -120,6 +120,8 @@ private:
 	void ShowPauseScreen();
 	// Show the graphics menu.
 	void ShowGraphicsMenu();
+	// Show game over screen.
+	void ShowGameOver();
 	// Update the 'main game'.
 	void UpdateGame();
 };
