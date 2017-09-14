@@ -37,7 +37,7 @@ void ChaserEnemy::Update(float deltaTime)
 		float mag = std::sqrt(std::pow(towardsDirection.x, 2) + std::pow(towardsDirection.y, 2));
 		towardsDirection.x /= mag;
 		towardsDirection.y /= mag;
-		towardsDirection*= 600.0f;
+		towardsDirection*= 500.0f;
 
 		if (GetSprite().getGlobalBounds().intersects(player->GetSprite().getGlobalBounds()) && !player->toBeDeleted && !toBeDeleted)
 		{

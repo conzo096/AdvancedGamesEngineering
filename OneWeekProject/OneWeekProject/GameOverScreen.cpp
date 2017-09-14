@@ -149,21 +149,20 @@ void GameOverScreen::DrawMenu(sf::RenderWindow & renderWindow)
 	score.setFont(textFont);
 	score.setString(std::to_string(Game::GetGameManager().score));
 	score.setPosition(Game::Game::GetScreenWidth() / 2, (50) + 2 * (Game::Game::GetScreenHeight() / 5));
-	renderWindow.draw(score);
 	for (int i = 0; i < Game::GetScores().size(); i++)
 	{
-		float O = Game::GetScores().at(i);
+		int O = Game::GetScores().at(i);
 		sf::Text score;
+		if (O == Game::GetGameManager().score)
+			score.setFillColor(sf::Color::Green);
 		score.setFont(textFont);
 		score.setString(std::to_string(O));
-		score.setPosition(Game::Game::GetScreenWidth() / 2, (50 + (i + 1) * 100) + (2 * (Game::Game::GetScreenHeight() / 5)));
+		score.setPosition(Game::Game::GetScreenWidth() / 2, (100 + (i + 1) * 100) + (2 * (Game::Game::GetScreenHeight() / 5)));
 		renderWindow.draw(score);
+		if (i == 3)
+			break;
 	}
 	renderWindow.display();
-	for (MenuItem o : options)
-	{
-		o.text.setFillColor(sf::Color::White);
-	}
 }
 
 

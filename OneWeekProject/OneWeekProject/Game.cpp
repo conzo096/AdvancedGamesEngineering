@@ -196,6 +196,7 @@ void Game::ShowGameOver()
 		case::GameOverScreen::showMainMenu:
 		{
 			SetGameState(Game::showingMainMenu);
+			ResetGame();
 			break;
 		}
 		case::GameOverScreen::exit:
@@ -229,7 +230,7 @@ void Game::UpdateGame()
 		PlayerShip* pl = (PlayerShip*)gameManager.Get("Player");
 		if (pl != NULL)
 		{
-			myText.setString(std::to_string(pl->GetHealth()));
+			myText.setString("HEALTH: "+std::to_string(pl->GetHealth()));
 		}
 		else
 		{
@@ -237,7 +238,6 @@ void Game::UpdateGame()
 			AddScore(GetGameManager().score);
 			std::sort(highScores.begin(), highScores.end(), GameManager::GreaterScore());
 			Game::SetGameState(Game::gameOver);
-			//ResetGame();
 		}
 		// assign a size 
 		myText.setCharacterSize(20);
@@ -249,10 +249,8 @@ void Game::UpdateGame()
 
 		// Set the font to our Text object 
 		myText.setFont(font);
-
 		sf::Text wave;
-
-		wave.setString(std::to_string(Game::GetGameManager().wave));
+		wave.setString("WAVE: "+ std::to_string(Game::GetGameManager().wave));
 		wave.setCharacterSize(20);
 
 		// Choose a color 
@@ -264,7 +262,7 @@ void Game::UpdateGame()
 		wave.setFont(font);	
 
 		sf::Text score;
-		score.setString(std::to_string(Game::GetGameManager().score));
+		score.setString("SCORE: "+ std::to_string(Game::GetGameManager().score));
 		score.setCharacterSize(20);
 
 		// Choose a color 

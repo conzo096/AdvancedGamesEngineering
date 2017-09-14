@@ -69,12 +69,12 @@ public:
 		instance->view = v;
 	}
 
-	static void AddScore(float score)
+	static void AddScore(int score)
 	{
 		instance->highScores.push_back(score);
 	}
 
-	static std::vector<float> GetScores()
+	static std::vector<int> GetScores()
 	{
 		return instance->highScores;
 	}
@@ -106,7 +106,7 @@ private:
 	// Instance of the game manager.
 	GameManager gameManager;
 	// Keep track of scores for the session.
-	std::vector<float> highScores;
+	std::vector<int> highScores;
 
 
 	// Loops, checking what game state it is in and acts

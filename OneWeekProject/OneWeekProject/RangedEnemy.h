@@ -6,7 +6,14 @@ public:
 	RangedEnemy();
 	~RangedEnemy();
 	void Update(float deltaTime);
-
+	void SetFireRate(float f)
+	{
+		fireRate = f;
+	}
+	void SetHealth(float h)
+	{
+		health = h;
+	}
 
 };
 

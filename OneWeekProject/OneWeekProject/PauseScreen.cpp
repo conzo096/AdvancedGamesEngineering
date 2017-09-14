@@ -148,23 +148,10 @@ void PauseMenu::DrawMenu(sf::RenderWindow & renderWindow)
 
 	sf::Text score;
 	score.setFont(textFont);
-	score.setString(std::to_string(Game::GetGameManager().score));
-	score.setPosition(Game::Game::GetScreenWidth() / 2, (50) + 2 * (Game::Game::GetScreenHeight() / 5));
+	score.setString("SCORE: "+std::to_string(Game::GetGameManager().score));
+	score.setPosition(Game::Game::GetScreenWidth() / 2, (100) + 2 * (Game::Game::GetScreenHeight() / 5));
 	renderWindow.draw(score);
-	for (int i=0; i < Game::GetScores().size();i++)
-	{
-		float O = Game::GetScores().at(i);
-		sf::Text score;
-		score.setFont(textFont);
-		score.setString(std::to_string(O));
-		score.setPosition(Game::Game::GetScreenWidth() / 2, (50+(i+1)*100) + (2 * (Game::Game::GetScreenHeight() / 5)));
-		renderWindow.draw(score);
-	}
 	renderWindow.display();
-	for (MenuItem o : options)
-	{
-		o.text.setFillColor(sf::Color::White);
-	}
 }
 
 

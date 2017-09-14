@@ -7,17 +7,17 @@ class Ship :
 public:
 	Ship();
 	~Ship();
-	float GetHealth()
+	int GetHealth()
 	{
 		return health;
 	}
 
-	void SetHealth(float h)
+	void SetHealth(int h)
 	{
 		health = h;
 	}
 
-	void AddHealth(float val)
+	void AddHealth(int val)
 	{
 		health += val;
 	}
@@ -34,7 +34,7 @@ public:
 
 protected:
 	// Health of the ship.
-	float health;
+	int health;
 	// Ships name.
 	std::string name;
 	//Fire rate.

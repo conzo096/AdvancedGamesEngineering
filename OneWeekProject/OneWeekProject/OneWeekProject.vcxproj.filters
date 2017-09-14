@@ -64,6 +64,9 @@
     <ClCompile Include="SplashScreen.cpp">
       <Filter>Source\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="BuffRangedEnemy.cpp">
+      <Filter>Source\Ships</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -128,6 +131,9 @@
       <Filter>Headers\Menus</Filter>
     </ClInclude>
     <ClInclude Include="Ship.h">
+      <Filter>Headers\Ships</Filter>
+    </ClInclude>
+    <ClInclude Include="BuffRangedEnemy.h">
       <Filter>Headers\Ships</Filter>
     </ClInclude>
   </ItemGroup>

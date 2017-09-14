@@ -174,15 +174,6 @@ GraphicsOption::MenuResult GraphicsOption::HandleController()
 void GraphicsOption::DrawMenu(sf::RenderWindow& renderWindow)
 {
 	renderWindow.clear();
-
-	//Load menu image from file
-	/*sf::Texture image;
-	image.loadFromFile("images/MainMenu.png");
-	sf::Sprite sprite(image);
-	sprite.setScale(sf::Vector2f(float(image.getSize().x) / Game::GetScreenWidth(), float(image.getSize().y) / Game::GetScreenHeight()));
-
-*/
-//	renderWindow.draw(sprite);
 	for (OptionItem o : options)
 	{
 		renderWindow.draw(o.text);

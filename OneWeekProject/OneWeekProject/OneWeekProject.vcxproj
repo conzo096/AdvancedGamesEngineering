@@ -119,6 +119,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Astroid.h" />
+    <ClInclude Include="BuffRangedEnemy.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="ChaserEnemy.h" />
     <ClInclude Include="EnemyBullet.h" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Astroid.cpp" />
+    <ClCompile Include="BuffRangedEnemy.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="ChaserEnemy.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
