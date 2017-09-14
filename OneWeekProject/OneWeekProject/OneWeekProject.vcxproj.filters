@@ -1,168 +1,166 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Bullets">
-      <UniqueIdentifier>{04609e2c-7158-4f22-9c64-fd423df1431a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects">
-      <UniqueIdentifier>{674eb397-6707-475c-9e9b-e3475d4c3878}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameScreens">
-      <UniqueIdentifier>{8247df15-d82e-4779-b7d0-3f9b5c4a2a94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Bullets">
-      <UniqueIdentifier>{96ab2f2d-c4d9-426a-8200-09bd68c2f168}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameObjects">
-      <UniqueIdentifier>{de31a1a2-0d9e-40ba-90c5-81728b869004}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameScreens">
-      <UniqueIdentifier>{5019e496-8a8e-4423-a3c7-4454c3ef9fb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Audio">
-      <UniqueIdentifier>{eab125ca-73a0-4856-b472-a4c4da327b9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Audio">
-      <UniqueIdentifier>{1393fb31-4677-4f0d-8519-246c317ce97c}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBullet.h">
-      <Filter>Header Files\Bullets</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Header Files\Bullets</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerBullet.h">
-      <Filter>Header Files\Bullets</Filter>
-    </ClInclude>
-    <ClInclude Include="Astroid.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="RangedEnemy.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderableObject.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Ship.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerShip.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerUp.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="SplashScreen.h">
-      <Filter>Header Files\GameScreens</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>Header Files\GameScreens</Filter>
-    </ClInclude>
-    <ClInclude Include="SFMLSoundProvider.h">
-      <Filter>Header Files\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="IAudioProvider.h">
-      <Filter>Header Files\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundFileCache.h">
-      <Filter>Header Files\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="ServiceLocator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsMenu.h">
-      <Filter>Header Files\GameScreens</Filter>
-    </ClInclude>
-    <ClInclude Include="PauseScreen.h">
-      <Filter>Header Files\GameScreens</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverScreen.h">
-      <Filter>Header Files\GameScreens</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files\Bullets</Filter>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBullet.cpp">
-      <Filter>Source Files\Bullets</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerBullet.cpp">
-      <Filter>Source Files\Bullets</Filter>
-    </ClCompile>
-    <ClCompile Include="Astroid.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerShip.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+    <ClCompile Include="ChaserEnemy.cpp">
+      <Filter>Source\Ships</Filter>
     </ClCompile>
     <ClCompile Include="RangedEnemy.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source\Ships</Filter>
     </ClCompile>
-    <ClCompile Include="PowerUp.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderableObject.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+    <ClCompile Include="PlayerShip.cpp">
+      <Filter>Source\Ships</Filter>
     </ClCompile>
     <ClCompile Include="Ship.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source\Ships</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files\GameScreens</Filter>
+    <ClCompile Include="Astroid.cpp">
+      <Filter>Source\Ships</Filter>
     </ClCompile>
-    <ClCompile Include="SplashScreen.cpp">
-      <Filter>Source Files\GameScreens</Filter>
+    <ClCompile Include="RenderableObject.cpp">
+      <Filter>Source\Ships</Filter>
     </ClCompile>
-    <ClCompile Include="SFMLSoundProvider.cpp">
-      <Filter>Source Files\Audio</Filter>
+    <ClCompile Include="EnemyBullet.cpp">
+      <Filter>Source\Bullets</Filter>
     </ClCompile>
-    <ClCompile Include="SoundFileCache.cpp">
-      <Filter>Source Files\Audio</Filter>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Source\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Source\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source\Bullets</Filter>
     </ClCompile>
     <ClCompile Include="ServiceLocator.cpp">
-      <Filter>Source Files\Audio</Filter>
+      <Filter>Source\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsMenu.cpp">
-      <Filter>Source Files\GameScreens</Filter>
+    <ClCompile Include="SFMLSoundProvider.cpp">
+      <Filter>Source\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="PauseScreen.cpp">
-      <Filter>Source Files\GameScreens</Filter>
+    <ClCompile Include="SoundFileCache.cpp">
+      <Filter>Source\Audio</Filter>
     </ClCompile>
     <ClCompile Include="GameOverScreen.cpp">
-      <Filter>Source Files\GameScreens</Filter>
+      <Filter>Source\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsMenu.cpp">
+      <Filter>Source\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseScreen.cpp">
+      <Filter>Source\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="SplashScreen.cpp">
+      <Filter>Source\Menus</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Game.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Astroid.h">
+      <Filter>Headers\Ships</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Headers\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="ChaserEnemy.h">
+      <Filter>Headers\Ships</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBullet.h">
+      <Filter>Headers\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScreen.h">
+      <Filter>Headers\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsMenu.h">
+      <Filter>Headers\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="IAudioProvider.h">
+      <Filter>Headers\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseScreen.h">
+      <Filter>Headers\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Headers\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Headers\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerShip.h">
+      <Filter>Headers\Ships</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUp.h">
+      <Filter>Headers\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="RangedEnemy.h">
+      <Filter>Headers\Ships</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLSoundProvider.h">
+      <Filter>Headers\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Headers\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject.h">
+      <Filter>Headers\Ships</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundFileCache.h">
+      <Filter>Headers\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashScreen.h">
+      <Filter>Headers\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Headers\Ships</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{38b43dbc-9d9d-41c7-b988-5334d20e358d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{687d363b-74d7-45d2-831e-ce8fd70157e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Ships">
+      <UniqueIdentifier>{f85b183f-9bbd-46ad-b468-819c66b64e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Bullets">
+      <UniqueIdentifier>{fcf16855-e3b3-480a-966f-e0f47c3d1dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Audio">
+      <UniqueIdentifier>{54fdac50-b6d6-4fbe-a6b5-3c3c24e2b492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Menus">
+      <UniqueIdentifier>{8044b98a-033e-4db5-8b11-eed96366d8ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Ships">
+      <UniqueIdentifier>{31e5713f-2554-4e70-b2b5-607ed9918f80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Bullets">
+      <UniqueIdentifier>{43673201-2b7e-4236-8bdd-bb7d0b8ee17e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Menus">
+      <UniqueIdentifier>{f168ae32-a614-4b44-89e9-c31ef9da9b2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Audio">
+      <UniqueIdentifier>{53cb2afa-3c5f-4e29-b1a7-a499a8e16760}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

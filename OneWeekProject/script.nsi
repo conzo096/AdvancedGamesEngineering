@@ -28,7 +28,7 @@ InstallDir "$PROGRAMFILES\${COMPANYNAME}\${APPNAME}"
  
 # This will be in the installer/uninstaller's title bar
 Name "${COMPANYNAME} - ${APPNAME}"
-outFile "sample-installer.exe"
+outFile "PoorGameInstaller.exe"
  
 !include LogicLib.nsh
  
@@ -57,16 +57,16 @@ section "install"
 	# Files added here should be removed by the uninstaller (see section "uninstall")
 	file "x64\Release\OneWeekProject.exe"
 	# Add any other files for the install directory (license files, app data, etc) here
-	file /r "x64\Release\bin\*.*"
-	file /r "OneWeekProject\res\Audio"
-	file /r "OneWeekProject\res\Fonts"
-	file /r "OneWeekProject\res\Images"
+	File /r "OneWeekProject\SFML-2.4.2\bin\*.*"
+	setOutPath $INSTDIR\res
+	File /r "OneWeekProject\res\Audio"
+	File /r "OneWeekProject\res\Fonts"
+	File /r "OneWeekProject\res\Images"
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
-	writeUninstaller "$INSTDIR\uninstall.exe"
- 
+	writeUninstaller "$INSTDIR\PoorGameUninstall.exe" 
 	# Start Menu
 	createDirectory "$SMPROGRAMS\${COMPANYNAME}"
-	createShortCut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}.lnk" "$INSTDIR\app.exe"
+	createShortCut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}.lnk" "$INSTDIR\OneWeekProject.exe"
  
 	# Registry information for add/remove programs
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} ${APPNAME}" "DisplayName" "${COMPANYNAME} - ${APPNAME} - ${DESCRIPTION}"
@@ -107,14 +107,24 @@ section "uninstall"
 	rmDir "$SMPROGRAMS\${COMPANYNAME}"
  
 	# Remove files
-	delete $INSTDIR\OneWeekProject.exe
-	delete $INSTDIR\OneWeekProject\res\Audio
-	delete $INSTDIR\OneWeekProject\res\Fonts
-	delete $INSTDIR\OneWeekProject\res\Images
-	
+	Delete "$INSTDIR\res\*.*"
+	Delete "$INSTDIR\res\Audio\*.*"
+	Delete "$INSTDIR\res\Fonts\*.*"
+	Delete "$INSTDIR\res\Images\*.*"
+	Delete "$INSTDIR\res\Images\GameObjects\*.*"
+	Delete "$INSTDIR\res\Images\*.*"
+	Delete "$INSTDIR\*.*"
+
+
  	# Always delete uninstaller as the last action
-	delete $INSTDIR\uninstall.exe
+	delete $INSTDIR\PoorGameUninstall.exe
  
+	rmDir $INSTDIR\res\Audio
+	rmDir $INSTDIR\res\Fonts
+	rmDir $INSTDIR\res\Images\GameObjects
+	rmDir $INSTDIR\res\Images
+	rmDir $INSTDIR\res
+	rmDir $INSTDIR
 	# Try to remove the install directory - this will only happen if it is empty
 	rmDir $INSTDIR
  

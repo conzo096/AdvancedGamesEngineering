@@ -6,6 +6,7 @@
 EnemyBullet::EnemyBullet()
 {
 	damage = 20;
+	LoadSprite("res/Images/GameObjects/Bullet.png");
 }
 
 
