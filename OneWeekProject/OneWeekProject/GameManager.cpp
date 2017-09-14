@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "RangedEnemy.h"
+#include "ChaserEnemy.h"
 #include "Astroid.h"
 #include "Game.h"
 #include "PowerUp.h"
@@ -83,6 +84,32 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 			astroid->SetPosition(spawnLoc.x,spawnLoc.y);
 			std::string enemyName = "Astroid" + std::to_string(i);
 			AddObject(enemyName, astroid);
+		}
+		if (bias > 2 && bias < 5)
+		{
+			ChaserEnemy* enemy = new ChaserEnemy();
+			// Need to add random feature to this (Spawn just out of view).
+			bool valid = false;
+			sf::Vector2f spawnLoc = sf::Vector2f(0, 0);
+			while (!valid)
+			{
+				float x = rand() % 3000 - 1500;
+				float y = rand() % 3000 - 1500;
+				spawnLoc = sf::Vector2f(x, y);
+				sf::FloatRect bounds(sf::Vector2f(0.f, 0.f), sf::Vector2f(Game::GetRenderWindow().getView().getSize().x, Game::GetRenderWindow().getView().getSize().y));
+
+				// Check if it is off screen
+				if (!bounds.contains(spawnLoc))
+				{
+					valid = true;
+				}
+
+			}
+			//enemy->SetPosition(i*(Game::Instance()->GetScreenWidth() / enemiesToSpawn), 50);
+			enemy->SetPosition(spawnLoc.x, spawnLoc.y);
+			std::string enemyName = "Enemy" + std::to_string(i);
+			enemy->SetName(enemyName);
+			AddObject(enemyName, enemy);
 		}
 		else
 		{

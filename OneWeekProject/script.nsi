@@ -57,10 +57,10 @@ section "install"
 	# Files added here should be removed by the uninstaller (see section "uninstall")
 	file "x64\Release\OneWeekProject.exe"
 	# Add any other files for the install directory (license files, app data, etc) here
-	file /r "x64\Release\bin\*.*"
-	file /r "OneWeekProject\Audio"
-	file /r "OneWeekProject\Fonts"
-	file /r "OneWeekProject\Images"
+	File /r "x64\Release\bin\*.*"
+	File /r "OneWeekProject\Audio"
+	File /r "OneWeekProject\Fonts"
+	File /r "OneWeekProject\Images"
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
 	writeUninstaller "$INSTDIR\uninstall.exe"
  
@@ -107,14 +107,25 @@ section "uninstall"
 	rmDir "$SMPROGRAMS\${COMPANYNAME}"
  
 	# Remove files
-	delete $INSTDIR\OneWeekProject.exe
-	delete $INSTDIR\Audio
-	delete $INSTDIR\OneWeekProject\Fonts
-	delete $INSTDIR\OneWeekProject\Images
+	Delete "$INSTDIR\*.*"
+	Delete "$INSTDIR\Audio\*.*"
+	Delete "$INSTDIR\Fonts\*.*"
+	Delete "$INSTDIR\Images\*.*"
+	Delete "$INSTDIR\Images\GameObjects\*.*"
+	Delete "$INSTDIR\Images\*.*"
 	
+	
+	Delete "$INSTDIR\uninstall.exe"
+
+
  	# Always delete uninstaller as the last action
 	delete $INSTDIR\uninstall.exe
  
+	rmDir $INSTDIR\Audio
+	rmDir $INSTDIR\Fonts
+	rmDir $INSTDIR\Images\GameObjects
+	rmDir $INSTDIR\Images
+	rmDir $INSTDIR
 	# Try to remove the install directory - this will only happen if it is empty
 	rmDir $INSTDIR
  

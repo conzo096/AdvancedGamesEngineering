@@ -45,9 +45,9 @@ void RangedEnemy::Update(float deltaTime)
 			bullet->SetPosition(GetSprite().getPosition().x, GetSprite().getPosition().y);
 			// Normalise then times by Speed *Create bullet property*
 			float mag = std::sqrt(std::pow(towardsDirection.x, 2) + std::pow(towardsDirection.y, 2));
-			towardsDirection.x/ mag;
-			towardsDirection.y / mag;
-			bullet->GetVelocity() = sf::Vector2f(towardsDirection*2.0f);
+			towardsDirection.x /= mag;
+			towardsDirection.y /= mag;
+			bullet->GetVelocity() = sf::Vector2f(towardsDirection*650.0f);
 			Game::GetGameManager().GetBullets().push_back(bullet);
 			//cooldown = fireRate;
 			cooldown = (rand() % 2) + 0.25;
@@ -63,7 +63,7 @@ void RangedEnemy::Update(float deltaTime)
 			// Chose a new direction.
 			//towardsDirection.x += rand() % 50 - 50;
 			//towardsDirection.y += rand() % 50 - 50;
-			GetSprite().move(-towardsDirection*0.5f*deltaTime);
+			GetSprite().move(-towardsDirection*0.8f*deltaTime);
 		}
 	}
 	else
