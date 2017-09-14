@@ -262,7 +262,7 @@ void Game::UpdateGame()
 		wave.setFont(font);	
 
 		sf::Text score;
-		score.setString("SCORE: "+ std::to_string(Game::GetGameManager().score));
+		score.setString("Enemies left: "+ std::to_string(Game::GetGameManager().enemiesAlive));
 		score.setCharacterSize(20);
 
 		// Choose a color 

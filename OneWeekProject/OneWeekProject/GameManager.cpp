@@ -4,6 +4,7 @@
 #include "Astroid.h"
 #include "Game.h"
 #include "PowerUp.h"
+#include "BuffRangedEnemy.h"
 #include <random>
 #include <iterator>
 GameManager::GameManager()
@@ -56,21 +57,25 @@ void GameManager::DeleteObjects(std::vector<std::string> names)
 // Spawn a new wave of enemies.
 void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 {
+	// Min number to spawn.
 	int enemiesToSpawn = wave*3 +1;
-	enemiesAlive = enemiesToSpawn;
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distribution(-1500,1500);
+	std::uniform_int_distribution<int> dist(0,10);
+
 	for (int i = 0; i < enemiesToSpawn; i++)
 	{
 		// Decide what enemy to spawn. 10% for astroid.
-		int bias = rand() % 10;
-		if (bias < 2)
+		int bias = dist(generator);
+		if (bias < 2 && wave >2)
 		{
 			Astroid* astroid = new Astroid();
 			bool valid = false;
 			sf::Vector2f spawnLoc = sf::Vector2f(0, 0);
 			while (!valid)
 			{
-				float x = rand() % 3000 - 1500;
-				float y = rand() % 4000 - 2000;
+				float x = distribution(generator);
+				float y = distribution(generator);
 				spawnLoc = sf::Vector2f(x, y);
 				sf::FloatRect bounds(sf::Vector2f(0.f, 0.f), sf::Vector2f(Game::GetRenderWindow().getView().getSize().x, Game::GetRenderWindow().getView().getSize().y));
 
@@ -85,7 +90,7 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 			std::string enemyName = "Astroid" + std::to_string(i);
 			AddObject(enemyName, astroid);
 		}
-		if (bias > 2 && bias < 5)
+		else if (bias > 2 && bias < 5)
 		{
 			ChaserEnemy* enemy = new ChaserEnemy();
 			// Need to add random feature to this (Spawn just out of view).
@@ -93,8 +98,8 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 			sf::Vector2f spawnLoc = sf::Vector2f(0, 0);
 			while (!valid)
 			{
-				float x = rand() % 3000 - 1500;
-				float y = rand() % 3000 - 1500;
+				float x = distribution(generator);
+				float y = distribution(generator);
 				spawnLoc = sf::Vector2f(x, y);
 				sf::FloatRect bounds(sf::Vector2f(0.f, 0.f), sf::Vector2f(Game::GetRenderWindow().getView().getSize().x, Game::GetRenderWindow().getView().getSize().y));
 
@@ -110,17 +115,47 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 			std::string enemyName = "Enemy" + std::to_string(i);
 			enemy->SetName(enemyName);
 			AddObject(enemyName, enemy);
+			enemiesAlive++;
 		}
+		
 		else
 		{
+			if (wave >3 && bias >=7)
+			{
+				BuffRangedEnemy* enemy = new BuffRangedEnemy();
+				// Need to add random feature to this (Spawn just out of view).
+				bool valid = false;
+				sf::Vector2f spawnLoc = sf::Vector2f(0, 0);
+				while (!valid)
+				{
+					float x = distribution(generator);
+					float y = distribution(generator);
+					spawnLoc = sf::Vector2f(x, y);
+					sf::FloatRect bounds(sf::Vector2f(0.f, 0.f), sf::Vector2f(Game::GetRenderWindow().getView().getSize().x, Game::GetRenderWindow().getView().getSize().y));
+
+					// Check if it is off screen
+					if (!bounds.contains(spawnLoc))
+					{
+						valid = true;
+					}
+
+				}
+				//enemy->SetPosition(i*(Game::Instance()->GetScreenWidth() / enemiesToSpawn), 50);
+				enemy->SetPosition(spawnLoc.x, spawnLoc.y);
+				std::string enemyName = "Enemy B" + std::to_string(i);
+				enemy->SetName(enemyName);
+				AddObject(enemyName, enemy);
+				enemiesAlive++;
+			}
+
 			RangedEnemy* enemy = new RangedEnemy();
 			// Need to add random feature to this (Spawn just out of view).
 			bool valid = false;
 			sf::Vector2f spawnLoc = sf::Vector2f(0, 0);
 			while (!valid)
 			{
-				float x = rand() % 3000 - 1500;
-				float y = rand() % 3000 - 1500;
+				int x = distribution(generator);
+				int y = distribution(generator);
 				spawnLoc = sf::Vector2f(x, y);
 				sf::FloatRect bounds(sf::Vector2f(0.f, 0.f), sf::Vector2f(Game::GetRenderWindow().getView().getSize().x, Game::GetRenderWindow().getView().getSize().y));
 
@@ -136,9 +171,12 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 			std::string enemyName = "Enemy" + std::to_string(i);
 			enemy->SetName(enemyName);
 			AddObject(enemyName, enemy);
+			enemiesAlive++;
 		}
 	}
 	wave++;
+
+	// Spawn randomly.
 
 	PowerUp* power = new PowerUp();
 	power->SetPosition(200, 200);
@@ -238,8 +276,10 @@ void GameManager::UpdateAll(float deltaTime)
 			if (strstr(it->first.c_str(), "Enemy") || strstr(it->first.c_str(), "Astroid"))
 			{
 				if (strstr(it->first.c_str(), "Enemy"))
+				{
 					Game::Instance()->GetGameManager().enemiesAlive--;
-				Game::Instance()->GetGameManager().score += it->second->scoreValue;
+					Game::Instance()->GetGameManager().score += it->second->scoreValue;
+				}
 			}
 			deletedList.push_back(it->first);
 		}

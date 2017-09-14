@@ -1,17 +1,5 @@
-﻿  Game.cpp
-Game.cpp(29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-Game.cpp(34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-Game.cpp(53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-Game.cpp(247): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
-Game.cpp(248): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-Game.cpp(258): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
-Game.cpp(259): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-Game.cpp(270): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
-Game.cpp(271): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Generating code
-  36 of 1479 functions ( 2.4%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    30 functions had inline decision re-evaluated but remain unchanged
+﻿  Generating code
+  All 1503 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   OneWeekProject.vcxproj -> C:\Users\conner\Desktop\AdvancedGamesEngineering\OneWeekProject\x64\Release\OneWeekProject.exe
   OneWeekProject.vcxproj -> C:\Users\conner\Desktop\AdvancedGamesEngineering\OneWeekProject\x64\Release\OneWeekProject.pdb (Full PDB)

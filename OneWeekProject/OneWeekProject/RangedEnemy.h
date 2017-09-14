@@ -14,6 +14,10 @@ public:
 	{
 		health = h;
 	}
+	void ReduceCooldown(float c)
+	{
+		cooldown -= c;
+	}
 
 };
 

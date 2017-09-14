@@ -6,7 +6,7 @@
 PlayerShip::PlayerShip():power()
 {
 	GetMaxVelocity() = sf::Vector2f(10,10);
-	health = 100;
+	health = 250;
 	isActive = true;
 	fireRate = 0.25f;
 	cooldown = 0.0f;
@@ -126,6 +126,10 @@ void PlayerShip::Update(float deltaTime)
 						bullet2->GetVelocity() = sf::Vector2f(0, -bullet2->speed);
 						Game::GetGameManager().GetBullets().push_back(bullet2);
 					}
+					else if (power->GetPowerUpType() == PowerUp::none)
+					{
+						Game::GetGameManager().PlayClip("res/Audio/outtaAmmo.wav");
+					}
 				}
 				cooldown = fireRate;
 			}
@@ -197,6 +201,10 @@ void PlayerShip::Update(float deltaTime)
 					bullet2->SetPosition(GetPosition().x - (GetSprite().getGlobalBounds().width), GetPosition().y - GetSprite().getGlobalBounds().height);
 					bullet2->GetVelocity() = sf::Vector2f(0, -bullet2->speed);
 					Game::GetGameManager().GetBullets().push_back(bullet2);
+				}
+				else if (power->GetPowerUpType() == PowerUp::none)
+				{
+					Game::GetGameManager().PlayClip("res/Audio/outtaAmmo.wav");
 				}
 			}
 			cooldown = fireRate;
