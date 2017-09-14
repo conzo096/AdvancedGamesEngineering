@@ -133,13 +133,13 @@ void GameOverScreen::DrawMenu(sf::RenderWindow & renderWindow)
 	renderWindow.clear();
 
 	//Load menu image from file
-	/*sf::Texture image;
-	image.loadFromFile("images/GameOverScreen.png");
+	sf::Texture image;
+	image.loadFromFile("res/Images/GameOver.png");
 	sf::Sprite sprite(image);
 	sprite.setScale(sf::Vector2f(float(image.getSize().x) / Game::GetScreenWidth(), float(image.getSize().y) / Game::GetScreenHeight()));
-	*/
+	
 
-	//	renderWindow.draw(sprite);
+	renderWindow.draw(sprite);
 	for (MenuItem o : options)
 	{
 		renderWindow.draw(o.text);
@@ -154,9 +154,13 @@ void GameOverScreen::DrawMenu(sf::RenderWindow & renderWindow)
 		int O = Game::GetScores().at(i);
 		sf::Text score;
 		if (O == Game::GetGameManager().score)
-			score.setFillColor(sf::Color::Green);
+		{
+			score.setFillColor(sf::Color::Color(0,250,0));
+			score.setString("YOU SCORED: "+ std::to_string(O));
+		}
+		else
+			score.setString(std::to_string(O));
 		score.setFont(textFont);
-		score.setString(std::to_string(O));
 		score.setPosition(Game::Game::GetScreenWidth() / 2, (100 + (i + 1) * 100) + (2 * (Game::Game::GetScreenHeight() / 5)));
 		renderWindow.draw(score);
 		if (i == 3)

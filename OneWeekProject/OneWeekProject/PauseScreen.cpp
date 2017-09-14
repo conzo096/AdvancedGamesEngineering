@@ -134,13 +134,13 @@ void PauseMenu::DrawMenu(sf::RenderWindow & renderWindow)
 	renderWindow.clear();
 
 	//Load menu image from file
-	/*sf::Texture image;
-	image.loadFromFile("images/PauseMenu.png");
+	sf::Texture image;
+	image.loadFromFile("res/Images/PauseMenu.png");
 	sf::Sprite sprite(image);
 	sprite.setScale(sf::Vector2f(float(image.getSize().x) / Game::GetScreenWidth(), float(image.getSize().y) / Game::GetScreenHeight()));
-*/
 
-//	renderWindow.draw(sprite);
+
+	renderWindow.draw(sprite);
 	for (MenuItem o : options)
 	{
 		renderWindow.draw(o.text);

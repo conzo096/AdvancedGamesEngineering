@@ -243,7 +243,7 @@ void Game::UpdateGame()
 		myText.setCharacterSize(20);
 
 		// Choose a color 
-		myText.setFillColor(sf::Color::Blue);
+		myText.setFillColor(sf::Color::White);
 		myText.setOrigin(myText.getString().getSize() / 2, myText.getScale().y / 2);
 		myText.setPosition(Game::GetScreenWidth()*0.02, Game::GetScreenHeight()*0.02);
 
@@ -254,7 +254,7 @@ void Game::UpdateGame()
 		wave.setCharacterSize(20);
 
 		// Choose a color 
-		wave.setFillColor(sf::Color::Blue);
+		wave.setFillColor(sf::Color::White);
 		wave.setOrigin(myText.getString().getSize() / 2, myText.getScale().y / 2);
 		wave.setPosition(Game::GetScreenWidth()*0.9, Game::GetScreenHeight()*0.02);
 
@@ -262,11 +262,11 @@ void Game::UpdateGame()
 		wave.setFont(font);	
 
 		sf::Text score;
-		score.setString("Enemies left: "+ std::to_string(Game::GetGameManager().enemiesAlive));
+		score.setString("ENEMIES: "+ std::to_string(Game::GetGameManager().enemiesAlive));
 		score.setCharacterSize(20);
 
 		// Choose a color 
-		score.setFillColor(sf::Color::Blue);
+		score.setFillColor(sf::Color::White);
 		score.setOrigin(myText.getString().getSize() / 2, myText.getScale().y / 2);
 		score.setPosition(Game::GetScreenWidth()*0.9, Game::GetScreenHeight()*0.05);
 
@@ -280,7 +280,7 @@ void Game::UpdateGame()
 			return;
 		}
 		
-		GetRenderWindow().clear(sf::Color(255, 255, 255));
+		GetRenderWindow().clear(sf::Color(20, 0, 150));
 
 		gameManager.UpdateAll(physicsClock.restart().asSeconds());
 

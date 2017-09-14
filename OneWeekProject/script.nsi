@@ -1,15 +1,11 @@
 # This installs two files, app.exe and logo.ico, creates a start menu shortcut, builds an uninstaller, and
 # adds uninstall information to the registry for Add/Remove Programs
  
-# To get started, put this script into a folder with the two files (app.exe, logo.ico, and license.rtf -
-# You'll have to create these yourself) and run makensis on it
- 
-# If you change the names "app.exe", "logo.ico", or "license.rtf" you should do a search and replace - they
-# show up in a few places.
+
 # All the other settings can be tweaked by editing the !defines at the top of this script
 !define APPNAME "GameDemo"
 !define COMPANYNAME "Conner Weatherston"
-!define DESCRIPTION "I am sorry."
+!define DESCRIPTION "I am sorry for this poor project."
 # These three must be integers
 !define VERSIONMAJOR 1
 !define VERSIONMINOR 1
@@ -124,10 +120,8 @@ section "uninstall"
 	rmDir $INSTDIR\res\Images\GameObjects
 	rmDir $INSTDIR\res\Images
 	rmDir $INSTDIR\res
-	rmDir $INSTDIR
 	# Try to remove the install directory - this will only happen if it is empty
 	rmDir $INSTDIR
-	rmDir $COMPANYNAME
  
 	# Remove uninstaller information from the registry
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} ${APPNAME}"

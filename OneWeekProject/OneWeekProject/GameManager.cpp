@@ -178,8 +178,25 @@ void GameManager::SpawnWave(sf::RenderWindow& renderWindow)
 
 	// Spawn randomly.
 
+	bool valid = false;
+	std::uniform_int_distribution<int> powerSpawn(0, 1000);
+	sf::Vector2f spawnLoc = sf::Vector2f(0, 0);
+	while (!valid)
+	{
+		int x = powerSpawn(generator);
+		int y = powerSpawn(generator);
+		spawnLoc = sf::Vector2f(x, y);
+		sf::FloatRect bounds(sf::Vector2f(0.f, 0.f), sf::Vector2f(Game::GetRenderWindow().getView().getSize().x, Game::GetRenderWindow().getView().getSize().y));
+
+		// Check if it is off screen
+		if (bounds.contains(spawnLoc))
+		{
+			valid = true;
+		}
+
+	}
 	PowerUp* power = new PowerUp();
-	power->SetPosition(200, 200);
+	power->SetPosition(spawnLoc.x, spawnLoc.y);
 	PowerUp::PowerUpType type = static_cast<PowerUp::PowerUpType>(rand() % 3);
 	power->SetPowerUpType(type);
 	power->SetDuration(5);
